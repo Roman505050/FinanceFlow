@@ -1,0 +1,107 @@
+#login {
+    padding: 50px 0;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form .cta-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form .cta-button:hover {
+    background-color: #0056b3;
+}
+
+.login-form p {
+    margin-top: 25px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+.login-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #dc3545;
+}
+
+.has-error input {
+    border-color: #dc3545;
+}
+
+.has-error .error {
+    margin-top: 5px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.error-message {
+    display: none;
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.form-group.has-error input {
+    border-color: #dc3545;
+}
+
+.form-group.has-error .error-message {
+    display: block;
+}

@@ -1,0 +1,76 @@
+#hero {
+    background: linear-gradient(135deg, #4a90e2, #50c878);
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+#hero p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out 1s both;
+}
+
+.cta-button:hover {
+    background-color: #ff4757;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.features {
+    padding: 5rem 0;
+    background-color: #fff;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}

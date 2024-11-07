@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Реєстрація{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('auth.static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+<section id="register">
+    <div class="container">
+        <div class="register-form">
+            <h2>Реєстрація</h2>
+            <form method="POST" action="{{ url_for('auth.register') }}" id="registerForm">
+                {{ form.hidden_tag() }}
+                <div class="form-group {% if form.username.errors %}has-error{% endif %}">
+                    {{ form.username.label }}
+                    {{ form.username(size=32, class_="form-control") }}
+                    <div class="error-message">
+                        {% for error in form.username.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                    {{ form.email.label }}
+                    {{ form.email(size=32, class_="form-control") }}
+                    <div class="error-message">
+                        {% for error in form.email.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+                    {{ form.password.label }}
+                    {{ form.password(size=32, class_="form-control") }}
+                    <div class="error-message">
+                        {% for error in form.password.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group {% if form.password2.errors %}has-error{% endif %}">
+                    {{ form.password2.label }}
+                    {{ form.password2(size=32, class_="form-control") }}
+                    <div class="error-message">
+                        {% for error in form.password2.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class_="cta-button") }}
+                </div>
+            </form>
+            <p>Вже зареєстровані? <a href="/login">Увійти</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('auth.static', filename='js/register.js') }}"></script>
+{% endblock %}

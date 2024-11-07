@@ -1,0 +1,268 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50c878;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --accent-color: #ff6b6b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.auth-buttons a {
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login {
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    margin-right: 10px;
+}
+
+.register {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.login:hover, .register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logout {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background-color: #ff4757;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
+}
+
+main {
+    flex: 1 0 auto;
+    padding-top: 80px;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    flex-shrink: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links, .auth-buttons {
+        display: none;
+    }
+
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero p {
+        font-size: 1.1rem;
+    }
+}
+
+
+
+
+/* For push error */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 16px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: flex;
+    align-items: center;
+    width: 300px;
+    max-width: 90vw;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-icon {
+    margin-right: 12px;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.toast-message {
+    flex-grow: 1;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+    margin-left: 12px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.toast-close:hover {
+    opacity: 1;
+}
+
+.toast-success {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+}
+
+.toast-error {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+}
+
+.toast-warning {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+.toast-info {
+    background-color: #d1ecf1;
+    border-left: 4px solid #17a2b8;
+}
+
+/* Іконки для різних типів повідомлень */
+.toast-success .toast-icon::before {
+    content: '\2714'; /* Unicode для галочки */
+    color: #28a745;
+}
+
+.toast-error .toast-icon::before {
+    content: '\2716'; /* Unicode для хрестика */
+    color: #dc3545;
+}
+
+.toast-warning .toast-icon::before {
+    content: '\26A0'; /* Unicode для знаку оклику в трикутнику */
+    color: #ffc107;
+}
+
+.toast-info .toast-icon::before {
+    content: '\2139'; /* Unicode для знаку інформації */
+    color: #17a2b8;
+}
+
+/* Адаптивність для малих екранів */
+@media (max-width: 480px) {
+    #toast-container {
+        left: 16px;
+        right: 16px;
+    }
+
+    .toast {
+        width: 100%;
+    }
+}

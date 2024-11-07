@@ -1,0 +1,108 @@
+#register {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.register-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.register-form h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+.register-form .form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+.register-form input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.register-form .cta-button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-form .cta-button:hover {
+    background-color: #0056b3;
+}
+
+.register-form p {
+    margin-top: 25px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+.register-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-form a:hover {
+    text-decoration: underline;
+}
+
+.has-error input {
+    border-color: #dc3545;
+}
+
+.form-group {
+    position: relative;
+}
+
+.error-message {
+    display: none;
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.form-group.has-error input {
+    border-color: #dc3545;
+}
+
+.form-group.has-error .error-message {
+    display: block;
+}

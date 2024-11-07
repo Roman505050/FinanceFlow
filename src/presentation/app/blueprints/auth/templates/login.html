@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Вхід{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('auth.static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<section id="login">
+    <div class="container">
+        <div class="login-form">
+            <h2>Вхід</h2>
+            <form method="POST" action="{{ url_for('auth.login') }}" id="loginForm">
+                {{ form.hidden_tag() }}
+                <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                    {{ form.email.label }}
+                    {{ form.email(size=32, class_="form-control") }}
+                    <div class="error-message">
+                        {% for error in form.email.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+                    {{ form.password.label }}
+                    {{ form.password(size=32, class_="form-control") }}
+                    <div class="error-message">
+                        {% for error in form.password.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class_="cta-button") }}
+                </div>
+            </form>
+            <p>Ще не зареєстровані? <a href="/register">Зареєструватися</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+{% block scripts %}
+<script type="module" src="{{ url_for('auth.static', filename='js/login.js') }}"></script>
+{% endblock %}

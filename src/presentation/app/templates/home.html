@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Finance Flow - Ваш фінансовий помічник{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    {% if session.get('username') %}
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Вітаємо, {{ session['username'] }}</h1>
+                    <p>Finance Flow допомагає вам контролювати ваші витрати та досягати фінансових цілей</p>
+                    <a href="/transactions" class="cta-button">Мої транзакції</a>
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Керуйте своїми фінансами з легкістю</h1>
+                    <p>Finance Flow допомагає вам контролювати ваші витрати та досягати фінансових цілей</p>
+                    <a href="/register" class="cta-button">Почати безкоштовно</a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Аналітика витрат</h3>
+                    <p>Отримуйте детальні звіти про ваші витрати та доходи</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Фінансові цілі</h3>
+                    <p>Встановлюйте та досягайте своїх фінансових цілей</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Розумні сповіщення</h3>
+                    <p>Отримуйте сповіщення про важливі фінансові події</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

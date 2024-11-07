@@ -1,0 +1,47 @@
+name: CI Checks
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+  pull_request:
+    branches: [ "master", "dev" ]
+  release:
+    types: [created, published]
+
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Set up Python 3.11
+          uses: actions/setup-python@v2
+          with:
+              python-version: 3.11
+
+        - name: Install Poetry
+          run: |
+            curl -sSL https://install.python-poetry.org | python3 -
+            echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+        - name: Install dependencies
+          run: |
+            poetry install
+
+        - name: Static type checking with mypy
+          run: |
+            # Run mypy for type checking
+            poetry run mypy .
+
+        - name: Lint with flake8
+          run: |
+            # Run flake8 to lint the code
+            poetry run flake8 src --max-line-length=79 --exclude='src/core/infrastructure/database/migrations/*'
+
+#        - name: Test with unittest
+#          run: |
+#            # Run tests with Python's unittest module
+#            python -m unittest discover tests
