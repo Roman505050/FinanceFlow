@@ -26,6 +26,11 @@ app.jinja_env.loader = ChoiceLoader(
 )
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html", hide_nav=True), 404
+
+
 @app.route("/")
 def home():  # put application's code here
     return render_template("home.html")
