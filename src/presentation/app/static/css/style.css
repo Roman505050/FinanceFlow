@@ -155,8 +155,6 @@ footer {
 }
 
 
-
-
 /* For push error */
 #toast-container {
     position: fixed;
@@ -234,28 +232,26 @@ footer {
     border-left: 4px solid #17a2b8;
 }
 
-/* Іконки для різних типів повідомлень */
 .toast-success .toast-icon::before {
-    content: '\2714'; /* Unicode для галочки */
+    content: '\2714';
     color: #28a745;
 }
 
 .toast-error .toast-icon::before {
-    content: '\2716'; /* Unicode для хрестика */
+    content: '\2716';
     color: #dc3545;
 }
 
 .toast-warning .toast-icon::before {
-    content: '\26A0'; /* Unicode для знаку оклику в трикутнику */
+    content: '\26A0';
     color: #ffc107;
 }
 
 .toast-info .toast-icon::before {
-    content: '\2139'; /* Unicode для знаку інформації */
+    content: '\2139';
     color: #17a2b8;
 }
 
-/* Адаптивність для малих екранів */
 @media (max-width: 480px) {
     #toast-container {
         left: 16px;
