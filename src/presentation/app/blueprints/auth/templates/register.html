@@ -15,7 +15,8 @@
                 {{ form.hidden_tag() }}
                 <div class="form-group {% if form.username.errors %}has-error{% endif %}">
                     {{ form.username.label }}
-                    {{ form.username(size=32, class_="form-control") }}
+                    {{ form.username(size=32, class_="form-control", pattern="^[a-zA-Z0-9_]+$", title="Username must
+                    only contain letters, numbers, and underscores") }}
                     <div class="error-message">
                         {% for error in form.username.errors %}
                         {{ error }}

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from uuid import UUID
+import re
 
 from core.domain.user.entities.role import RoleEntity
 
@@ -20,3 +21,8 @@ class UserEntity:
             raise ValueError("Email is too long")
         if not 3 <= len(self.username) <= 64:
             raise ValueError("Username must be between 3 and 64 characters")
+        pattern = re.compile(r"^[a-zA-Z0-9_]+$")
+        if not pattern.match(self.username):
+            raise ValueError(
+                "Username must only contain letters, numbers, and underscores."
+            )

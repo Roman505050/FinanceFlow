@@ -9,12 +9,24 @@ from wtforms.validators import (  # type: ignore[import-untyped]
     Length,
     Email,
     EqualTo,
+    Regexp,
 )
 
 
 class RegistrationForm(FlaskForm):
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=3, max=64)]
+        "Username",
+        validators=[
+            DataRequired(),
+            Length(min=3, max=64),
+            Regexp(
+                r"^[a-zA-Z0-9_]+$",
+                message=(
+                    "Username must only contain letters, "
+                    "numbers, and underscores."
+                ),
+            ),
+        ],
     )
     email = StringField(
         "Email", validators=[DataRequired(), Email(), Length(max=100)]
