@@ -1,13 +1,13 @@
 from email_validator import validate_email, EmailNotValidError
 from pydantic import ValidationError
+from loguru import logger
 
 from core.application.user.dto.user import RegisterUserDTO, UserDTO
-from core.application.user.ports.services.cryptography import (
-    ICryptographyService,
-)
-from core.domain.user.repositories.exceptions import UserAlreadyExistsException
+from core.application.user.factories.user import UserFactory
+from core.domain.user.entities.role import RoleEntity
+from core.domain.user.exceptions import UserAlreadyExistsException
 from core.domain.user.repositories.user import IUserRepository
-from core.domain.user.entities.user import UserEntity
+from core.domain.user.repositories.role import IRoleRepository
 from core.shared.exceptions import NotFoundException
 
 
@@ -15,10 +15,12 @@ class RegisterUserUseCase:
     def __init__(
         self,
         user_repository: IUserRepository,
-        cryptography_service: ICryptographyService,
+        role_repository: IRoleRepository,
+        user_factory: UserFactory,
     ):
         self._user_repository = user_repository
-        self._cryptography_service = cryptography_service
+        self._user_factory = user_factory
+        self._role_repository = role_repository
 
     async def execute(self, register_data: RegisterUserDTO) -> UserDTO:
         try:
@@ -44,18 +46,21 @@ class RegisterUserUseCase:
         except NotFoundException:
             pass
 
-        salt = self._cryptography_service.generate_salt()
-        password_hash = self._cryptography_service.hash_password(
-            password=register_data.password.get_secret_value(), salt=salt
-        )
+        try:
+            member_role = await self._role_repository.get_by_name("member")
+        except NotFoundException:
+            logger.warning(f"Role 'member' not found, creating it")
+            member_role = RoleEntity.create("member")
 
-        user = UserEntity.create(
+        user = self._user_factory.create_user(
             username=register_data.username,
             email=register_data.email,
-            password_hash=password_hash,
+            password=register_data.password.get_secret_value(),
+            roles=[member_role],
         )
 
-        await self._user_repository.save(user)
+        user = await self._user_repository.save(user)
+
         try:
             user_dto = UserDTO(
                 user_id=user.user_id, username=user.username, email=user.email
@@ -64,5 +69,5 @@ class RegisterUserUseCase:
             return user_dto
         except ValidationError as e:
             # Because if an error occurs, it is not a user error
-            print(e)  # TODO: replace with logger
+            logger.error(e)
             raise Exception("Invalid data") from e

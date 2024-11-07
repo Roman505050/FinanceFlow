@@ -7,14 +7,17 @@ from flask import (
     flash,
 )
 from pydantic import ValidationError
+from loguru import logger
 
 from core.application.user.dto.user import RegisterUserDTO, LoginUserDTO
 from core.application.user.exceptions.invalid_credentials import (
     UserInvalidCredentialsException,
 )
+from core.application.user.factories.user import UserFactory
 from core.application.user.use_cases.register import RegisterUserUseCase
 from core.application.user.use_cases.login import LoginUserUseCase
 from core.infrastructure.database.core import SessionContextManager
+from core.infrastructure.repositories.role import RoleRepository
 from core.infrastructure.repositories.user import UserRepository
 from core.infrastructure.services.cryptography import CryptographyService
 from core.shared.exceptions import AlreadyExistsException
@@ -55,7 +58,7 @@ async def login():
                     password=form.password.data,
                 )
             except ValidationError as e:
-                print(e)  # TODO: replace with logging
+                logger.error(e)
                 flash("Invalid data", "error")
                 return render_template("login.html", form=form)
 
@@ -76,7 +79,7 @@ async def login():
 
             return redirect(url_for("home"))
         except Exception as e:
-            print(e)  # TODO: replace with logging
+            logger.error(e)
             flash("Something went wrong", "error")
     return render_template("login.html", form=form)
 
@@ -104,14 +107,18 @@ async def register():
                     password=form.password.data,
                 )
             except ValidationError as e:
-                print(e)  # TODO: replace with logging
+                logger.error(e)
                 flash("Invalid data", "error")
                 return render_template("login.html", form=form)
 
             cryptography_service = CryptographyService()
+            user_factory = UserFactory(cryptography_service)
             async with SessionContextManager() as db_session:
                 user_repo = UserRepository(db_session)
-                use_case = RegisterUserUseCase(user_repo, cryptography_service)
+                role_repo = RoleRepository(db_session)
+                use_case = RegisterUserUseCase(
+                    user_repo, role_repo, user_factory
+                )
 
                 try:
                     user_dto = await use_case.execute(register_dto)
@@ -128,6 +135,6 @@ async def register():
 
             return redirect(url_for("home"))
         except Exception as e:
-            print(e)  # TODO: replace with logging
+            logger.error(e)
             flash("Something went wrong", "error")
     return render_template("register.html", form=form)

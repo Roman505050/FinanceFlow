@@ -16,6 +16,7 @@ flask-wtf = "^1.2.2"
 asyncpg = "^0.30.0"
 python-dotenv = "^1.0.1"
 gunicorn = "^23.0.0"
+loguru = "^0.7.2"
 
 
 [tool.poetry.group.dev.dependencies]
