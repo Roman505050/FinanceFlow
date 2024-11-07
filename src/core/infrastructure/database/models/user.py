@@ -4,7 +4,6 @@ from sqlalchemy.dialects.postgresql import (
     UUID as PgUUID,
 )
 from uuid import uuid4, UUID
-import asyncio
 
 from core.domain.user.entities.user import UserEntity
 from core.infrastructure.database.models.role import Role

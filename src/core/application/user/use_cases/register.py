@@ -49,7 +49,7 @@ class RegisterUserUseCase:
         try:
             member_role = await self._role_repository.get_by_name("member")
         except NotFoundException:
-            logger.warning(f"Role 'member' not found, creating it")
+            logger.warning("Role 'member' not found, creating it")
             member_role = RoleEntity.create("member")
 
         user = self._user_factory.create_user(
