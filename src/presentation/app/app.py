@@ -5,7 +5,6 @@ from flask import (
     redirect,
     session,
 )
-from jinja2 import FileSystemLoader, ChoiceLoader
 
 from presentation.app.blueprints.admin.routes import admin_bp
 from presentation.app.blueprints.auth.routes import auth_bp
