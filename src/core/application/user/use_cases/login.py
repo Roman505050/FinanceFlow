@@ -1,4 +1,5 @@
 from pydantic import ValidationError
+from loguru import logger
 
 from core.application.user.dto.user import LoginUserDTO, UserDTO
 from core.application.user.exceptions.invalid_credentials import (
@@ -35,11 +36,8 @@ class LoginUserUseCase:
             raise UserInvalidCredentialsException("Invalid email or password")
 
         try:
-            user_dto = UserDTO(
-                user_id=user.user_id, username=user.username, email=user.email
-            )
-            return user_dto
+            return UserDTO.from_entity(user)
         except ValidationError as e:
             # Because if an error occurs, it is not a user error
-            print(e)  # TODO: Replace with a logger
+            logger.error(f"Error converting user {user.user_id!r} to DTO")
             raise Exception("Invalid data") from e

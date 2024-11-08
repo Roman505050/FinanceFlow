@@ -119,6 +119,8 @@ nav {
 main {
     flex: 1 0 auto;
     padding-top: 80px;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 footer {

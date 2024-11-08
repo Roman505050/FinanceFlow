@@ -1,6 +1,9 @@
 from pydantic import BaseModel, EmailStr, SecretStr, Field
 from uuid import UUID
 
+from core.application.user.dto.role import RoleDTO
+from core.domain.user.entities.user import UserEntity
+
 
 class LoginUserDTO(BaseModel):
     email: EmailStr = Field(max_length=100)
@@ -19,3 +22,13 @@ class UserDTO(BaseModel):
     user_id: UUID
     username: str
     email: EmailStr
+    roles: list[RoleDTO]
+
+    @staticmethod
+    def from_entity(entity: UserEntity) -> "UserDTO":
+        return UserDTO(
+            user_id=entity.user_id,
+            username=entity.username,
+            email=entity.email,
+            roles=[RoleDTO.from_entity(role) for role in entity.roles],
+        )

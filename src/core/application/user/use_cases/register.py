@@ -62,12 +62,10 @@ class RegisterUserUseCase:
         user = await self._user_repository.save(user)
 
         try:
-            user_dto = UserDTO(
-                user_id=user.user_id, username=user.username, email=user.email
-            )
+            user_dto = UserDTO.from_entity(user)
             await self._user_repository.commit()
             return user_dto
         except ValidationError as e:
             # Because if an error occurs, it is not a user error
-            logger.error(e)
+            logger.error(f"Error converting user {user.user_id!r} to DTO")
             raise Exception("Invalid data") from e
