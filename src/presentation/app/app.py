@@ -18,18 +18,6 @@ app.register_blueprint(auth_bp, url_prefix="")
 app.register_blueprint(admin_bp, url_prefix="/admin")
 
 
-app.jinja_env.loader = ChoiceLoader(
-    [
-        FileSystemLoader("src/presentation/app/templates"),
-        FileSystemLoader("presentation/app/templates"),
-        FileSystemLoader("src/presentation/app/blueprints/auth/templates"),
-        FileSystemLoader("presentation/app/blueprints/auth/templates"),
-        FileSystemLoader("src/presentation/app/blueprints/admin/templates"),
-        FileSystemLoader("presentation/app/blueprints/admin/templates"),
-    ]
-)
-
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html", hide_nav=True), 404
