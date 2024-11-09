@@ -27,7 +27,7 @@ class CreateTransactionUseCase:
         """Create a new transaction.
 
         :arg request: The transaction data.
-        :raise CategoryNotFoundException: If the category does not exist.
+        :raise CategoryNotFoundException: If the operation does not exist.
         :raise CurrencyNotFoundException: If the currency does not exist.
         :return: The created transaction.
         """
@@ -48,4 +48,5 @@ class CreateTransactionUseCase:
             description=request.description,
         )
         entity = await self._transaction_repository.save(entity)
+        await self._transaction_repository.commit()
         return TransactionDTO.from_entity(entity)

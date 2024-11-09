@@ -5,29 +5,20 @@ from flask import (
     redirect,
     session,
 )
-from jinja2 import FileSystemLoader, ChoiceLoader
+from flasgger import Swagger  # type: ignore[import-untyped]
 
 from presentation.app.blueprints.admin.routes import admin_bp
 from presentation.app.blueprints.auth.routes import auth_bp
+from presentation.app.api.operation import operation_api_bp
 from config import SESSION_SECRET_KEY
 
 app = Flask(__name__)
 app.secret_key = SESSION_SECRET_KEY
 
+swagger = Swagger(app)
 app.register_blueprint(auth_bp, url_prefix="")
 app.register_blueprint(admin_bp, url_prefix="/admin")
-
-
-app.jinja_env.loader = ChoiceLoader(
-    [
-        FileSystemLoader("src/presentation/app/templates"),
-        FileSystemLoader("presentation/app/templates"),
-        FileSystemLoader("src/presentation/app/blueprints/auth/templates"),
-        FileSystemLoader("presentation/app/blueprints/auth/templates"),
-        FileSystemLoader("src/presentation/app/blueprints/admin/templates"),
-        FileSystemLoader("presentation/app/blueprints/admin/templates"),
-    ]
-)
+app.register_blueprint(operation_api_bp, url_prefix="/api/v1")
 
 
 @app.errorhandler(404)

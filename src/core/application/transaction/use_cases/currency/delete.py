@@ -17,3 +17,4 @@ class DeleteCurrencyUseCase:
         :return:
         """
         await self._currency_repository.delete(currency_id)
+        await self._currency_repository.commit()

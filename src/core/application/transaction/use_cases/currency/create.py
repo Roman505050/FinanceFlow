@@ -24,4 +24,5 @@ class CreateCurrencyUseCase:
             currency_code=request.currency_code,
         )
         entity = await self._currency_repository.save(entity)
+        await self._currency_repository.commit()
         return CurrencyDTO.from_entity(entity)

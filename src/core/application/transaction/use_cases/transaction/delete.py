@@ -18,3 +18,4 @@ class DeleteTransactionUseCase:
         :return: None
         """
         await self._transaction_repository.delete(transaction_id)
+        await self._transaction_repository.commit()

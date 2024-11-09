@@ -8,11 +8,13 @@ class DeleteCategoryUseCase:
         self._category_repository = category_repository
 
     async def execute(self, category_id: UUID) -> None:
-        """Delete a category.
+        """Delete a operation.
 
-        :arg category_id: The category ID.
-        :raise CategoryNotFoundException: If the category does not exist.
-        :raise CategoryNotDeletableException: If the category is not deletable.
+        :arg category_id: The operation ID.
+        :raise CategoryNotFoundException: If the operation does not exist.
+        :raise CategoryNotDeletableException: If the operation
+                                                is not deletable.
         :return: None
         """
         await self._category_repository.delete(category_id)
+        await self._category_repository.commit()
