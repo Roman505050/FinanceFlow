@@ -19,3 +19,6 @@ class ICurrencyRepository(ABC):
 
     @abstractmethod
     async def get_all(self) -> list[CurrencyEntity]: ...
+
+    @abstractmethod
+    async def delete(self, currency_id: UUID) -> None: ...

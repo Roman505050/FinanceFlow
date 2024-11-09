@@ -8,7 +8,7 @@ from core.domain.transaction.entities.operation import OperationEntity
 class CategoryEntity:
     category_id: UUID
     category_name: str
-    operation_type: OperationEntity
+    operation: OperationEntity
 
     def __post_init__(self):
         self._validate()

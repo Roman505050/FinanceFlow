@@ -29,8 +29,3 @@ class ITransactionRepository(ABC):
     async def get_by_filters(
         self, filters: TransactionFilters
     ) -> list[TransactionEntity]: ...
-
-    @abstractmethod
-    async def paginate(
-        self, filters: TransactionFilters, page: int, per_page: int
-    ) -> list[TransactionEntity]: ...

@@ -1,0 +1,2 @@
+class CurrencyNotDeletableException(Exception):
+    pass

@@ -1,0 +1,2 @@
+class OperationNotDeletableException(Exception):
+    pass

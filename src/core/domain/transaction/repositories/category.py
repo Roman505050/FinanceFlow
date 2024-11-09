@@ -19,3 +19,11 @@ class ICategoryRepository(ABC):
 
     @abstractmethod
     async def get_all(self) -> list[CategoryEntity]: ...
+
+    @abstractmethod
+    async def get_by_operation_id(
+        self, operation_id: UUID
+    ) -> list[CategoryEntity]: ...
+
+    @abstractmethod
+    async def delete(self, category_id: UUID) -> None: ...

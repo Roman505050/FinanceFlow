@@ -19,3 +19,6 @@ class IOperationRepository(ABC):
 
     @abstractmethod
     async def get_all(self) -> list[OperationEntity]: ...
+
+    @abstractmethod
+    async def delete(self, operation_id: UUID) -> None: ...
