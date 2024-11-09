@@ -15,4 +15,11 @@ class TransactionEntity:
     description: str
     data: datetime.datetime
 
+    def __post_init__(self):
+        self._validate()
 
+    def _validate(self):
+        if not 10 <= len(self.description) <= 255:
+            raise ValueError(
+                "Description must be between 10 and 64 characters"
+            )
