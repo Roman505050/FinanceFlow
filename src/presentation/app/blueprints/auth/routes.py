@@ -27,9 +27,6 @@ from presentation.app.blueprints.auth.forms import RegistrationForm, LoginForm
 auth_bp = Blueprint(
     "auth",
     __name__,
-    static_folder="static",
-    template_folder="templates",
-    static_url_path="/auth/static",
 )
 
 
@@ -47,10 +44,10 @@ async def login():
             # Because mypy thinks that form.data is None
             if form.email.data is None:
                 form.email.errors.append("Email is required")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
             if form.password.data is None:
                 form.password.errors.append("Password is required")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
 
             try:
                 login_dto = LoginUserDTO(
@@ -60,7 +57,7 @@ async def login():
             except ValidationError as e:
                 logger.error(e)
                 flash("Invalid data", "error")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
 
             cryptography_service = CryptographyService()
             async with SessionContextManager() as db_session:
@@ -75,13 +72,13 @@ async def login():
                     session["email"] = user_dto.email
                 except UserInvalidCredentialsException as e:
                     flash(str(e), "error")
-                    return render_template("login.html", form=form)
+                    return render_template("auth/login.html", form=form)
 
             return redirect(url_for("home"))
         except Exception as e:
             logger.error(e)
             flash("Something went wrong", "error")
-    return render_template("login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 
 @auth_bp.route("/register", methods=["GET", "POST"])
@@ -92,13 +89,13 @@ async def register():
             # Because mypy thinks that form.data is None
             if form.username.data is None:
                 form.username.errors.append("Username is required")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
             if form.email.data is None:
                 form.email.errors.append("Email is required")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
             if form.password.data is None:
                 form.password.errors.append("Password is required")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
 
             try:
                 register_dto = RegisterUserDTO(
@@ -109,7 +106,7 @@ async def register():
             except ValidationError as e:
                 logger.error(e)
                 flash("Invalid data", "error")
-                return render_template("login.html", form=form)
+                return render_template("auth/login.html", form=form)
 
             cryptography_service = CryptographyService()
             user_factory = UserFactory(cryptography_service)
@@ -131,10 +128,10 @@ async def register():
                         form.email.errors.append(str(e))
                     if "username" in str(e).lower():
                         form.username.errors.append(str(e))
-                    return render_template("register.html", form=form)
+                    return render_template("auth/register.html", form=form)
 
             return redirect(url_for("home"))
         except Exception as e:
             logger.error(e)
             flash("Something went wrong", "error")
-    return render_template("register.html", form=form)
+    return render_template("auth/register.html", form=form)

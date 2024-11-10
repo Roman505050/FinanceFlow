@@ -6,6 +6,14 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
 {% endblock %}
 
+{% block header %}
+<header>
+    <nav class="container">
+        <div class="logo">Finance Flow</div>
+    </nav>
+</header>
+{% endblock %}
+
 {% block content %}
 <main>
     <div class="container">
@@ -21,6 +29,10 @@
 </main>
 {% endblock %}
 
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/404.js') }}"></script>
+<script src="{{ url_for('static', filename='js/errors/404.js') }}"></script>
 {% endblock %}

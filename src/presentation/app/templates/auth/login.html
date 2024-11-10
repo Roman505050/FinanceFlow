@@ -1,0 +1,40 @@
+{% from "macros/forms.html" import render_input %}
+
+{% extends 'base.html' %}
+
+{% block title %}Вхід{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/login.css') }}">
+{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+<section id="login">
+    <div class="container">
+        <div class="login-form">
+            <h2>Вхід</h2>
+            <form method="POST" action="{{ url_for('auth.login') }}" id="loginForm">
+                {{ form.hidden_tag() }}
+                {{ render_input(form.email, 32, "form-control") }}
+                {{ render_input(form.password, 32, "form-control") }}
+                <div class="form-group">
+                    {{ form.submit(class_="cta-button") }}
+                </div>
+            </form>
+            <p>Ще не зареєстровані? <a href="/register">Зареєструватися</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/auth/login.js') }}"></script>
+{% endblock %}

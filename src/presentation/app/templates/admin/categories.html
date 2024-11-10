@@ -1,48 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'admin/base.html' %}
 
-{% block title %}Finance Flow - Адміністратор{% endblock %}
+{% block title %}Керування категоріями | Finance Flow{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/admin.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/categories.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="admin-header">
-        <h1>Панель адміністратора</h1>
-        <p>Керування категоріями та перегляд статистики</p>
-    </div>
-
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-header">
-                <h3>Загальна кількість транзакцій</h3>
-                <span class="icon">🔄</span>
-            </div>
-            <div class="metric-value">15,678</div>
-            <div class="metric-subtitle">За весь час</div>
-        </div>
-
-        <div class="metric-card">
-            <div class="metric-header">
-                <h3>Активні користувачі</h3>
-                <span class="icon">👥</span>
-            </div>
-            <div class="metric-value">1,234</div>
-            <div class="metric-subtitle">Зареєстровані користувачі</div>
-        </div>
-
-        <div class="metric-card">
-            <div class="metric-header">
-                <h3>Категорії</h3>
-                <span class="icon">📊</span>
-            </div>
-            <div class="metric-value">12</div>
-            <div class="metric-subtitle">6 доходів, 6 витрат</div>
-        </div>
-    </div>
-
     <div class="categories-section">
         <h2>Керування категоріями</h2>
 

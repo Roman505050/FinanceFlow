@@ -1,0 +1,20 @@
+<header>
+    <nav class="container">
+        <div class="logo">Finance Flow</div>
+        <ul class="nav-links">
+            <li><a href="/">Головна</a></li>
+            <li><a href="/transactions">Мої транзакції</a></li>
+            <li><a href="/statistics">Статистика</a></li>
+        </ul>
+        <div class="auth-buttons">
+            {% if session.get('username') %}
+                <form action="/logout" method="POST">
+                    <button type="submit" class="logout">Вийти</button>
+                </form>
+            {% else %}
+                <a href="/login" class="login">Увійти</a>
+                <a href="/register" class="register">Зареєструватися</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>

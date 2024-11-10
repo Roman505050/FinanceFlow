@@ -13,9 +13,6 @@ from presentation.app.utils.permissions import has_permissions
 admin_bp = Blueprint(
     "admin",
     __name__,
-    static_folder="static",
-    template_folder="templates",
-    static_url_path="/admin/static",
 )
 
 
@@ -34,4 +31,19 @@ async def check_admin():
 
 @admin_bp.route("")
 def admin_home():
-    return render_template("admin.html")
+    return render_template("admin/admin.html")
+
+
+@admin_bp.route("/categories")
+def admin_categories():
+    return render_template("admin/categories.html")
+
+
+@admin_bp.route("/currencies")
+def admin_currencies():
+    return render_template("admin/currencies.html")
+
+
+@admin_bp.route("/operations")
+def admin_operations():
+    return render_template("admin/operations.html")
