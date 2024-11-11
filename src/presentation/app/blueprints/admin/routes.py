@@ -31,7 +31,7 @@ async def check_admin():
 
 @admin_bp.route("")
 def admin_home():
-    return render_template("admin/admin.html")
+    return render_template("admin/home.html")
 
 
 @admin_bp.route("/categories")
