@@ -1,0 +1,58 @@
+/* Add button */
+.add-btn {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #333;
+}
+
+@media (max-width: 768px) {
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Delete button */
+.delete-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.875rem;
+    margin: 0 auto;
+}
+
+.delete-btn:hover {
+    background: #ff1111;
+}
+
+
+@media (max-width: 480px) {
+    .delete-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.875rem;
+    }
+
+    .type {
+        gap: 4px;
+    }
+}

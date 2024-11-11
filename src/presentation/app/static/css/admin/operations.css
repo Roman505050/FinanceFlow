@@ -1,17 +1,17 @@
-.categories-section {
+.operations-section {
     background: white;
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.categories-section h2 {
+.operations-section h2 {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     color: var(--text-color);
 }
 
-.category-form {
+.operation-form {
     margin-bottom: 2rem;
 }
 
@@ -28,14 +28,15 @@
     font-size: 0.875rem;
 }
 
-.categories-list {
+
+.operations-list {
     border: 1px solid #eee;
     border-radius: 6px;
 }
 
-.category-header {
+.operation-header {
     display: grid;
-    grid-template-columns: 1fr 200px 100px;
+    grid-template-columns: 1fr 200px;
     padding: 1rem;
     background: #f9f9f9;
     border-bottom: 1px solid #eee;
@@ -44,27 +45,27 @@
     text-align: center;
 }
 
-.category-header span:first-child {
+.operation-header span:first-child {
     text-align: left;
 }
 
-.category-item {
+.operation-item {
     display: grid;
-    grid-template-columns: 1fr 200px 100px;
+    grid-template-columns: 1fr 200px;
     align-items: center;
     padding: 1rem;
     border-bottom: 1px solid #eee;
 }
 
-.category-item:last-child {
+.operation-item:last-child {
     border-bottom: none;
 }
 
-.category-name {
+.operation-name {
     text-align: left;
 }
 
-.category-type {
+.operation-type {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,6 +98,7 @@
     color: #28a745;
 }
 
+
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
@@ -110,9 +112,8 @@
         flex-direction: column;
     }
 
-
-    .category-header, .category-item {
-        grid-template-columns: 1fr 120px 80px;
+    .operation-header, .category-item {
+        grid-template-columns: 1fr 120px;
     }
 
     .type {
@@ -121,11 +122,11 @@
 }
 
 @media (max-width: 480px) {
-    .category-header, .category-item {
-        grid-template-columns: 1fr 100px 60px;
+    .operation-header, .operation-item {
+        grid-template-columns: 1fr 100px;
     }
 
-    .category-type {
+    .operation-type {
         width: 30px;
         height: 30px;
         font-size: 0.875rem;

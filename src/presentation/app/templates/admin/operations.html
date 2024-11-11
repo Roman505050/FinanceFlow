@@ -1,3 +1,44 @@
 {% extends 'admin/base.html' %}
 
 {% block title %}Керування операціями | Finance Flow{% endblock %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/operations.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="operations-section">
+        <h2>Керування операціями</h2>
+
+        <div class="operation-form">
+            <div class="input-group">
+                <input type="text" id="newOperation" placeholder="Введіть назву нової операції">
+                <button class="add-btn">
+                    <span>+</span>
+                    Додати
+                </button>
+            </div>
+        </div>
+
+        <div class="operations-list">
+            <div class="operation-header">
+                <span>Назва операції</span>
+                <span>Дії</span>
+            </div>
+            <div class="operation-item">
+                <span class="operation-name">Доходи</span>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="operation-item">
+                <span class="operation-name">Витрати</span>
+                <button class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            <!-- More operation items... -->
+        </div>
+    </div>
+</div>
+{% endblock %}
