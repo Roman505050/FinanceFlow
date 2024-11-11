@@ -10,6 +10,7 @@ from flasgger import Swagger  # type: ignore[import-untyped]
 from presentation.app.blueprints.admin.routes import admin_bp
 from presentation.app.blueprints.auth.routes import auth_bp
 from presentation.app.api.operation import operation_api_bp
+from presentation.app.api.category import category_api_bp
 from config import SESSION_SECRET_KEY
 
 app = Flask(__name__)
@@ -19,6 +20,7 @@ swagger = Swagger(app)
 app.register_blueprint(auth_bp, url_prefix="")
 app.register_blueprint(admin_bp, url_prefix="/admin")
 app.register_blueprint(operation_api_bp, url_prefix="/api/v1")
+app.register_blueprint(category_api_bp, url_prefix="/api/v1")
 
 
 @app.errorhandler(404)

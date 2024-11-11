@@ -2,7 +2,7 @@ from core.application.transaction.dto.category import CategoryDTO
 from core.domain.transaction.repositories.category import ICategoryRepository
 
 
-class GetAllUseCase:
+class GetAllCategoriesUseCase:
     def __init__(self, category_repository: ICategoryRepository):
         self._category_repository = category_repository
 
