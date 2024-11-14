@@ -11,6 +11,7 @@ from presentation.app.blueprints.admin.routes import admin_bp
 from presentation.app.blueprints.auth.routes import auth_bp
 from presentation.app.api.operation import operation_api_bp
 from presentation.app.api.category import category_api_bp
+from presentation.app.api.currency import currency_api_bp
 from config import SESSION_SECRET_KEY
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ app.register_blueprint(auth_bp, url_prefix="")
 app.register_blueprint(admin_bp, url_prefix="/admin")
 app.register_blueprint(operation_api_bp, url_prefix="/api/v1/operation")
 app.register_blueprint(category_api_bp, url_prefix="/api/v1/category")
+app.register_blueprint(currency_api_bp, url_prefix="/api/v1/currency")
 
 
 @app.errorhandler(404)
