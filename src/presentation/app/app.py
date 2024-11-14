@@ -19,8 +19,8 @@ app.secret_key = SESSION_SECRET_KEY
 swagger = Swagger(app)
 app.register_blueprint(auth_bp, url_prefix="")
 app.register_blueprint(admin_bp, url_prefix="/admin")
-app.register_blueprint(operation_api_bp, url_prefix="/api/v1")
-app.register_blueprint(category_api_bp, url_prefix="/api/v1")
+app.register_blueprint(operation_api_bp, url_prefix="/api/v1/operation")
+app.register_blueprint(category_api_bp, url_prefix="/api/v1/category")
 
 
 @app.errorhandler(404)

@@ -32,7 +32,7 @@ from presentation.app.utils.tools import get_parsed_errors, get_current_user
 operation_api_bp = Blueprint("operation_api", __name__)
 
 
-@operation_api_bp.route("/operation", methods=["POST"])
+@operation_api_bp.route("", methods=["POST"])
 async def create_operation():
     """
     Create a new operation
@@ -119,7 +119,7 @@ async def create_operation():
     return jsonify({"ok": True, "operation": operation.model_dump()}), 201
 
 
-@operation_api_bp.route("/operation/<uuid:operation_id>", methods=["DELETE"])
+@operation_api_bp.route("/<uuid:operation_id>", methods=["DELETE"])
 async def delete_operation(operation_id: UUID):
     """
     Delete an operation
@@ -205,7 +205,7 @@ async def delete_operation(operation_id: UUID):
     return jsonify({"ok": True}), 200
 
 
-@operation_api_bp.route("/operation", methods=["GET"])
+@operation_api_bp.route("", methods=["GET"])
 async def get_all_operations():
     """
     Get all operations
@@ -255,13 +255,14 @@ async def get_all_operations():
     )
 
 
-@operation_api_bp.route("/autocomplete/operation", methods=["GET"])
+@operation_api_bp.route("/autocomplete", methods=["GET"])
 async def autocomplete_operation():
     """
     Autocomplete operations
     ---
     tags:
       - Operations
+      - Autocomplete
     responses:
       200:
         description: Operations list

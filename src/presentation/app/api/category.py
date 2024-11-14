@@ -37,7 +37,7 @@ from presentation.app.utils.tools import get_current_user, get_parsed_errors
 category_api_bp = Blueprint("category_api", __name__)
 
 
-@category_api_bp.route("/category", methods=["POST"])
+@category_api_bp.route("", methods=["POST"])
 async def create_category():
     """
     Create a new category
@@ -291,7 +291,7 @@ async def create_category():
     return jsonify({"ok": True, "category": category.model_dump()}), 201
 
 
-@category_api_bp.route("/category", methods=["GET"])
+@category_api_bp.route("", methods=["GET"])
 async def get_all_categories():
     """
     Get all categories
@@ -372,13 +372,14 @@ async def get_all_categories():
     )
 
 
-@category_api_bp.route("/autocomplete/category", methods=["GET"])
+@category_api_bp.route("/autocomplete", methods=["GET"])
 async def autocomplete_category():
     """
     Autocomplete categories
     ---
     tags:
       - Categories
+      - Autocomplete
     parameters:
       - in: query
         name: operation_id
@@ -468,7 +469,7 @@ async def autocomplete_category():
     )
 
 
-@category_api_bp.route("/category/<uuid:operation_id>", methods=["DELETE"])
+@category_api_bp.route("/<uuid:operation_id>", methods=["DELETE"])
 async def delete_category(operation_id: UUID):
     """
     Delete a category
