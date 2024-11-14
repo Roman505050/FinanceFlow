@@ -6,9 +6,6 @@ from core.domain.user.entities.user import UserEntity
 
 class IUserRepository(ABC):
     @abstractmethod
-    async def commit(self) -> None: ...
-
-    @abstractmethod
     async def save(self, user: UserEntity) -> UserEntity: ...
 
     @abstractmethod

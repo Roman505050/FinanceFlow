@@ -17,9 +17,6 @@ class UserRepository(IUserRepository):
     def __init__(self, session: AsyncSession):
         self._session = session
 
-    async def commit(self) -> None:
-        await self._session.commit()
-
     async def save(self, user: UserEntity) -> UserEntity:
         user_model = self.model.from_entity(user)
         await self._session.execute(
@@ -62,6 +59,7 @@ class UserRepository(IUserRepository):
         roles = roles_result.scalars().all()
         user_model.roles = list(roles)
 
+        await self._session.commit()
         return user_model.to_entity()
 
     async def delete(self, user_id: UUID) -> None:
@@ -69,6 +67,7 @@ class UserRepository(IUserRepository):
         result = await self._session.execute(stmt)
         if result.rowcount == 0:
             raise UserNotFoundException(f"User with id {user_id} not found")
+        await self._session.commit()
 
     async def get_by_id(self, user_id: UUID) -> UserEntity:
         stmt = (

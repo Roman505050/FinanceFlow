@@ -6,9 +6,6 @@ from core.domain.user.entities.role import RoleEntity
 
 class IRoleRepository(ABC):
     @abstractmethod
-    async def commit(self) -> None: ...
-
-    @abstractmethod
     async def save(self, role: RoleEntity) -> RoleEntity: ...
 
     @abstractmethod

@@ -14,12 +14,10 @@ class RoleRepository(IRoleRepository):
     def __init__(self, session: AsyncSession):
         self._session = session
 
-    async def commit(self) -> None:
-        await self._session.commit()
-
     async def save(self, role: RoleEntity) -> RoleEntity:
         role_model = self.model.from_entity(role)
         self._session.add(role_model)
+        await self._session.commit()
         return role_model.to_entity()
 
     async def delete(self, role_id: UUID) -> None:
@@ -27,6 +25,7 @@ class RoleRepository(IRoleRepository):
         result = await self._session.execute(stmt)
         if result.rowcount == 0:
             raise RoleNotFoundException(f"Role with id {role_id} not found")
+        await self._session.commit()
 
     async def get_by_id(self, role_id: UUID) -> RoleEntity:
         stmt = select(self.model).filter_by(role_id=role_id)
