@@ -1,4 +1,4 @@
-from sqlalchemy import String
+from sqlalchemy import String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import (
     UUID as PgUUID,
@@ -27,6 +27,10 @@ class Operation(Base):
         unique=True,
         index=True,
     )
+    is_income: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+    )
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
 
@@ -35,10 +39,12 @@ class Operation(Base):
         return Operation(
             operation_id=operation.operation_id,
             operation_name=operation.operation_name,
+            is_income=operation.is_income,
         )
 
     def to_entity(self) -> OperationEntity:
         return OperationEntity(
             operation_id=self.operation_id,
             operation_name=self.operation_name,
+            is_income=self.is_income,
         )

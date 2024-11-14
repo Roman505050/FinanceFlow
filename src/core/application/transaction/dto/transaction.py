@@ -10,7 +10,7 @@ class CreateTransactionDTO(BaseModel):
     user_id: UUID
     category_id: UUID
     currency_id: UUID
-    amount: Decimal
+    amount: Decimal = Field(gt=0)
     description: str = Field(min_length=10, max_length=255)
     date: datetime.datetime
 
@@ -22,6 +22,7 @@ class TransactionDTO(BaseModel):
     category_name: str
     operation_id: UUID
     operation_name: str
+    operation_is_income: bool
     currency_id: UUID
     currency_name: str
     currency_code: str
@@ -39,6 +40,7 @@ class TransactionDTO(BaseModel):
             category_name=entity.category.category_name,
             operation_id=entity.category.operation.operation_id,
             operation_name=entity.category.operation.operation_name,
+            operation_is_income=entity.category.operation.is_income,
             currency_id=entity.money.currency.currency_id,
             currency_name=entity.money.currency.currency_name,
             currency_code=entity.money.currency.currency_code,

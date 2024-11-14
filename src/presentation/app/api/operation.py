@@ -48,6 +48,9 @@ async def create_operation():
             operation_name:
               type: string
               example: "Operation Name"
+            is_income:
+              type: boolean
+              example: true
     responses:
       201:
         description: Operation created
@@ -78,6 +81,8 @@ async def create_operation():
               type: object
               example:
                 operation_name:
+                  - "Missing data for required field."
+                is_income:
                   - "Missing data for required field."
     """
     try:
@@ -232,6 +237,9 @@ async def get_all_operations():
                   operation_name:
                     type: string
                     example: "Operation Name"
+                  is_income:
+                    type: boolean
+                    example: true
     """
     try:
         async with SessionContextManager() as db_session:
@@ -277,6 +285,12 @@ async def autocomplete_operation():
               value:
                 type: string
                 example: "00000000-0000-0000-0000-000000000000"
+              payload:
+                type: object
+                properties:
+                  is_positive:
+                    type: boolean
+                    example: true
     """
     try:
         async with SessionContextManager() as db_session:

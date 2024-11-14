@@ -9,6 +9,13 @@ class Money:
     currency: CurrencyEntity
     amount: Decimal
 
+    def __post_init__(self):
+        self._validate_amount()
+
+    def _validate_amount(self):
+        if self.amount < 0:
+            raise ValueError("Amount must be greater than 0")
+
     def __add__(self, other: "Money") -> "Money":
         if self.currency != other.currency:
             raise ValueError("Cannot add money with different currencies")

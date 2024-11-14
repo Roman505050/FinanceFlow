@@ -1,4 +1,4 @@
-from sqlalchemy import String, ForeignKey, DECIMAL, DateTime
+from sqlalchemy import String, ForeignKey, DECIMAL, DateTime, CheckConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import (
     UUID as PgUUID,
@@ -73,6 +73,10 @@ class Transaction(Base):
     currency: Mapped[Currency] = relationship(
         "Currency",
         backref="currencies",
+    )
+
+    __table_args__ = (
+        CheckConstraint("amount > 0", name="amount_positive"),
     )
 
     @staticmethod

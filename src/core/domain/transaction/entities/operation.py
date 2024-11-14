@@ -6,6 +6,7 @@ from uuid import UUID
 class OperationEntity:
     operation_id: UUID
     operation_name: str
+    is_income: bool
 
     def __post_init__(self):
         self._validate()

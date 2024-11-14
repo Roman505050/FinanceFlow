@@ -6,6 +6,7 @@ from core.domain.transaction.entities.operation import OperationEntity
 
 class CreateOperationDTO(BaseModel):
     operation_name: str = Field(min_length=3, max_length=64)
+    is_income: bool
 
 
 class OperationDTO(CreateOperationDTO):
@@ -16,4 +17,5 @@ class OperationDTO(CreateOperationDTO):
         return OperationDTO(
             operation_id=entity.operation_id,
             operation_name=entity.operation_name,
+            is_income=entity.is_income,
         )

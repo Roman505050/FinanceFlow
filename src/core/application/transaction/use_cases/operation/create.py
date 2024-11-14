@@ -18,6 +18,9 @@ class CreateOperationUseCase:
                                                 already exists.
         :return: The created operation.
         """
-        entity = OperationFactory.create(operation_name=request.operation_name)
+        entity = OperationFactory.create(
+            operation_name=request.operation_name,
+            is_income=request.is_income,
+        )
         entity = await self._operation_repository.save(entity)
         return OperationDTO.from_entity(entity)
