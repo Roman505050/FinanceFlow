@@ -51,7 +51,7 @@ class CategoryRepository(ICategoryRepository):
         model_instance = result.scalars().first()
         if not model_instance:
             raise CategoryNotFoundException(
-                f"Category with id {category_id!r} not found"
+                f"Category with id {str(category_id)!r} not found"
             )
         return model_instance.to_entity()
 

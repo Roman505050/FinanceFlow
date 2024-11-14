@@ -75,9 +75,7 @@ class Transaction(Base):
         backref="currencies",
     )
 
-    __table_args__ = (
-        CheckConstraint("amount > 0", name="amount_positive"),
-    )
+    __table_args__ = (CheckConstraint("amount > 0", name="amount_positive"),)
 
     @staticmethod
     def from_entity(entity: TransactionEntity) -> "Transaction":

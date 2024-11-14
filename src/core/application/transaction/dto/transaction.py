@@ -29,7 +29,7 @@ class TransactionDTO(BaseModel):
     currency_symbol: str
     amount: Decimal
     description: str
-    data: datetime.datetime
+    date: datetime.datetime
 
     @staticmethod
     def from_entity(entity: TransactionEntity) -> "TransactionDTO":
@@ -47,5 +47,5 @@ class TransactionDTO(BaseModel):
             currency_symbol=entity.money.currency.currency_symbol,
             amount=entity.money.amount,
             description=entity.description,
-            data=entity.date,
+            date=entity.date,
         )

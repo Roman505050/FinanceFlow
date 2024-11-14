@@ -7,7 +7,7 @@ from core.domain.transaction.repositories.transaction import (
 )
 
 
-class GetAllByUserIdUseCase:
+class GetAllTransactionsByUserUseCase:
     def __init__(self, transaction_repository: ITransactionRepository):
         self._transaction_repository = transaction_repository
 

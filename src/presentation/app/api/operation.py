@@ -137,7 +137,6 @@ async def delete_operation(operation_id: UUID):
         schema:
           type: uuid
           example: "00000000-0000-0000-0000-000000000000"
-
     responses:
         200:
             description: Operation deleted

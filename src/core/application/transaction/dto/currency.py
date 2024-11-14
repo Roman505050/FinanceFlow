@@ -13,7 +13,7 @@ CurrencyCode = Annotated[
     custom_error_msg(
         lambda _, __: PydanticCustomError(
             "str_error",
-            f"Currency code should consist of "
+            "Currency code should consist of "
             "exactly 3 uppercase letters (e.g., USD, EUR).",
         )
     ),
