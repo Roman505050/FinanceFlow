@@ -17,4 +17,3 @@ class DeleteCategoryUseCase:
         :return: None
         """
         await self._category_repository.delete(category_id)
-        await self._category_repository.commit()

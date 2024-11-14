@@ -7,9 +7,6 @@ from core.domain.transaction.filters.transaction import TransactionFilters
 
 class ITransactionRepository(ABC):
     @abstractmethod
-    async def commit(self) -> None: ...
-
-    @abstractmethod
     async def save(
         self, transaction: TransactionEntity
     ) -> TransactionEntity: ...

@@ -5,8 +5,6 @@ from core.domain.transaction.entities.category import CategoryEntity
 
 
 class ICategoryRepository(ABC):
-    @abstractmethod
-    async def commit(self) -> None: ...
 
     @abstractmethod
     async def save(self, category: CategoryEntity) -> CategoryEntity: ...

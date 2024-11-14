@@ -48,5 +48,4 @@ class CreateTransactionUseCase:
             description=request.description,
         )
         entity = await self._transaction_repository.save(entity)
-        await self._transaction_repository.commit()
         return TransactionDTO.from_entity(entity)

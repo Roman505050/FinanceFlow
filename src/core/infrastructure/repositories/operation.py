@@ -24,9 +24,6 @@ class OperationRepository(IOperationRepository):
     def __init__(self, session: AsyncSession):
         self._session = session
 
-    async def commit(self) -> None:
-        await self._session.commit()
-
     async def save(self, operation: OperationEntity) -> OperationEntity:
         stmt = insert(self.model).values(
             operation_id=operation.operation_id,
@@ -39,6 +36,7 @@ class OperationRepository(IOperationRepository):
                 f"Operation with name {operation.operation_name!r} "
                 f"already exists"
             )
+        await self._session.commit()
         return operation
 
     async def get_by_id(self, operation_id: UUID) -> OperationEntity:
@@ -85,3 +83,4 @@ class OperationRepository(IOperationRepository):
             raise OperationNotDeletableException(
                 f"Operation with id {operation_id!r} cannot be deleted"
             ) from e
+        await self._session.commit()

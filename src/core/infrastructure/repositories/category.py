@@ -24,9 +24,6 @@ class CategoryRepository(ICategoryRepository):
     def __init__(self, session: AsyncSession):
         self._session = session
 
-    async def commit(self) -> None:
-        await self._session.commit()
-
     async def save(self, category: CategoryEntity) -> CategoryEntity:
         stmt = insert(self.model).values(
             category_id=category.category_id,
@@ -41,6 +38,7 @@ class CategoryRepository(ICategoryRepository):
                 f"already exists for "
                 f"operation {category.operation.operation_name!r}"
             ) from e
+        await self._session.commit()
         return category
 
     async def get_by_id(self, category_id: UUID) -> CategoryEntity:
@@ -109,3 +107,4 @@ class CategoryRepository(ICategoryRepository):
             raise CategoryNotDeletableException(
                 f"Category with id {str(category_id)!r} not deletable"
             ) from e
+        await self._session.commit()

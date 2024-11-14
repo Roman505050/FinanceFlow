@@ -19,9 +19,6 @@ class CurrencyRepository(ICurrencyRepository):
     def __init__(self, session: AsyncSession):
         self._session = session
 
-    async def commit(self) -> None:
-        await self._session.commit()
-
     async def save(self, currency: CurrencyEntity) -> CurrencyEntity:
         stmt = insert(self.model).values(
             currency_id=currency.currency_id,
@@ -36,6 +33,7 @@ class CurrencyRepository(ICurrencyRepository):
                 f"Currency with code {currency.currency_code!r} "
                 f"already exists"
             ) from e
+        await self._session.commit()
         return currency
 
     async def get_by_id(self, currency_id: UUID) -> CurrencyEntity:
@@ -79,3 +77,4 @@ class CurrencyRepository(ICurrencyRepository):
             raise CategoryNotDeletableException(
                 f"Category with id {str(currency_id)!r} not deletable"
             ) from e
+        await self._session.commit()

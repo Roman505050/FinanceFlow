@@ -20,5 +20,4 @@ class CreateOperationUseCase:
         """
         entity = OperationFactory.create(operation_name=request.operation_name)
         entity = await self._operation_repository.save(entity)
-        await self._operation_repository.commit()
         return OperationDTO.from_entity(entity)

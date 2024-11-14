@@ -5,8 +5,6 @@ from core.domain.transaction.entities.currency import CurrencyEntity
 
 
 class ICurrencyRepository(ABC):
-    @abstractmethod
-    async def commit(self) -> None: ...
 
     @abstractmethod
     async def save(self, currency: CurrencyEntity) -> CurrencyEntity: ...

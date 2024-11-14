@@ -34,6 +34,5 @@ class CreateCategoryUseCase:
         )
 
         category = await self._category_repository.save(category)
-        await self._category_repository.commit()
 
         return CategoryDTO.from_entity(category)

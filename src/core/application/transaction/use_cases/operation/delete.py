@@ -18,4 +18,3 @@ class DeleteOperationUseCase:
         :return: None
         """
         await self._operation_repository.delete(operation_id)
-        await self._operation_repository.commit()
