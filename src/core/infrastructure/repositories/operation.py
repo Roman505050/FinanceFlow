@@ -81,7 +81,7 @@ class OperationRepository(IOperationRepository):
         stmt_delete = delete(self.model).filter_by(operation_id=operation_id)
         try:
             await self._session.execute(stmt_delete)
-        except IntegrityError:
+        except IntegrityError as e:
             raise OperationNotDeletableException(
                 f"Operation with id {operation_id!r} cannot be deleted"
-            )
+            ) from e

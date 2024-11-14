@@ -105,7 +105,7 @@ class CategoryRepository(ICategoryRepository):
 
         try:
             await self._session.execute(stmt_delete)
-        except CategoryNotDeletableException as e:
+        except IntegrityError as e:
             raise CategoryNotDeletableException(
                 f"Category with id {str(category_id)!r} not deletable"
             ) from e
