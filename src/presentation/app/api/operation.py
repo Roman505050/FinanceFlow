@@ -254,6 +254,7 @@ async def get_all_operations():
         200,
     )
 
+
 @operation_api_bp.route("/autocomplete/operation", methods=["GET"])
 async def autocomplete_operation():
     """
