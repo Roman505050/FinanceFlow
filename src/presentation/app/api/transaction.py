@@ -33,7 +33,7 @@ from presentation.app.utils.tools import get_current_user, get_parsed_errors
 transaction_api_bp = Blueprint("transaction_api", __name__)
 
 
-@transaction_api_bp.route("/transaction", methods=["POST"])
+@transaction_api_bp.route("", methods=["POST"])
 async def create_transaction():
     """
     Create a transaction.
