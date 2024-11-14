@@ -63,7 +63,6 @@ class RegisterUserUseCase:
 
         try:
             user_dto = UserDTO.from_entity(user)
-            await self._user_repository.commit()
             return user_dto
         except ValidationError as e:
             # Because if an error occurs, it is not a user error
