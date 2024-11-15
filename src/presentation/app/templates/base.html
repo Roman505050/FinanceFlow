@@ -24,12 +24,13 @@
     {% block footer %}
     <!-- Footer goes here -->
     {% endblock %}
-
-    <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/base.js') }}"></script>
     <script>
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
+             document.addEventListener('DOMContentLoaded', function() {
                 handleFlashedMessages({{ messages|tojson }});
+            });
             {% endif %}
         {% endwith %}
     </script>

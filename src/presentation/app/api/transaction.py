@@ -499,6 +499,7 @@ async def get_user_transactions():
             use_case = GetAllTransactionsByUserUseCase(transaction_repository)
             transactions = await use_case.execute(user.user_id)
     except Exception as e:
+        raise e
         logger.error(e)
         return (
             jsonify(

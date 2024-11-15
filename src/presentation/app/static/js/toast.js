@@ -1,4 +1,4 @@
-function showToast(message, type) {
+export function showToast(message, type) {
     const toastContainer = document.getElementById('toast-container');
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
@@ -24,20 +24,7 @@ function showToast(message, type) {
     });
 }
 
-function removeToast(toast) {
+export function removeToast(toast) {
     toast.classList.remove('show');
     setTimeout(() => toast.remove(), 300);
 }
-
-
-window.handleFlashedMessages = function (messages) {
-    if (!messages || !Array.isArray(messages)) {
-        console.error('No messages or invalid messages format');
-        return;
-    }
-
-    messages.forEach(([category, message]) => {
-        const toastCategory = category || 'info';
-        showToast(message, toastCategory);
-    });
-};

@@ -297,6 +297,7 @@ async def autocomplete_operation():
             use_case = GetAllOperationUseCase(operation_repository)
             operations = await use_case.execute()
     except Exception as error:
+        raise error
         logger.error(error)
         return jsonify({"ok": False, "message": "INTERNAL_SERVER_ERROR"}), 500
 

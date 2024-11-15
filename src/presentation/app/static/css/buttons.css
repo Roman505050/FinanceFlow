@@ -44,6 +44,9 @@
     background: #ff1111;
 }
 
+.hidden {
+    display: none;
+}
 
 @media (max-width: 480px) {
     .delete-btn {
