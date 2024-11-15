@@ -15,7 +15,7 @@ class TransactionFactory:
         category: CategoryEntity,
         currency: CurrencyEntity,
         amount: Decimal,
-        description: str,
+        description: str | None,
         date: datetime.datetime,
     ) -> TransactionEntity:
         return TransactionEntity(

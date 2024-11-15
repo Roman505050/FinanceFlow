@@ -12,14 +12,17 @@ class TransactionEntity:
     user_id: UUID
     category: CategoryEntity
     money: Money
-    description: str
+    description: str | None
     date: datetime.datetime
 
     def __post_init__(self):
         self._validate()
 
     def _validate(self):
-        if not 10 <= len(self.description) <= 255:
+        if (
+            self.description is not None
+            and not 10 <= len(self.description) <= 255
+        ):
             raise ValueError(
                 "Description must be between 10 and 64 characters"
             )

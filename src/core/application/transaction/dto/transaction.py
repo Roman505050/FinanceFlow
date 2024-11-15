@@ -6,7 +6,6 @@ import datetime
 
 from core.domain.transaction.entities.transaction import TransactionEntity
 from core.domain.transaction.enums.operation import (
-    OperationType,
     get_operation_type_string,
 )
 
@@ -16,7 +15,7 @@ class CreateTransactionDTO(BaseModel):
     category_id: UUID
     currency_id: UUID
     amount: Decimal = Field(gt=0, le=Decimal("99999999"))
-    description: str = Field(min_length=10, max_length=255)
+    description: str | None = Field(min_length=10, max_length=255)
     date: datetime.datetime
 
 
@@ -33,7 +32,7 @@ class TransactionDTO(BaseModel):
     currency_code: str
     currency_symbol: str
     amount: Decimal
-    description: str
+    description: str | None
     date: datetime.datetime
 
     @staticmethod

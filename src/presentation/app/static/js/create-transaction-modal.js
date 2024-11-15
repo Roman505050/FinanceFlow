@@ -143,7 +143,7 @@ form.addEventListener('submit', async (e) => {
         currency_id: formData.get('currency'),
         amount: formData.get('amount'),
         date: formData.get('date'),
-        description: formData.get('description')
+        description: formData.get('description') || null
     }
 
     const success = await saveTransaction(transaction);

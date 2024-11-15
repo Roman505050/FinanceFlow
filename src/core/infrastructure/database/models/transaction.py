@@ -58,7 +58,7 @@ class Transaction(Base):
     )
     description: Mapped[str] = mapped_column(
         String(255),
-        nullable=False,
+        nullable=True,
     )
     date: Mapped[datetime.datetime] = mapped_column(
         DateTime(timezone=True),

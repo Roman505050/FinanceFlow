@@ -90,7 +90,7 @@ function createDescriptionRow(transaction) {
     row.id = `description-${transaction.transaction_id}`;
     row.innerHTML = `
                 <td colspan="6">
-                    <div class="description-content">${transaction.description}</div>
+                    <div class="description-content">${transaction.description || 'Опис відсутній'}</div>
                 </td>
             `;
     return row;

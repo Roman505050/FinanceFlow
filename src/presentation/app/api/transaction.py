@@ -115,7 +115,7 @@ async def create_transaction():
                   type: string
                   example: "10.0"
                 description:
-                  type: string
+                  type: string | null
                   example: "This is a description"
                 date:
                   type: string
@@ -404,7 +404,7 @@ async def get_user_transactions():
                     type: string
                     example: "10.0"
                   description:
-                    type: string
+                    type: string | null
                     example: "This is a description"
                   date:
                     type: string
