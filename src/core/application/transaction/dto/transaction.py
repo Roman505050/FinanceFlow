@@ -10,7 +10,7 @@ class CreateTransactionDTO(BaseModel):
     user_id: UUID
     category_id: UUID
     currency_id: UUID
-    amount: Decimal = Field(gt=0)
+    amount: Decimal = Field(gt=0, le=Decimal("99999999"))
     description: str = Field(min_length=10, max_length=255)
     date: datetime.datetime
 
