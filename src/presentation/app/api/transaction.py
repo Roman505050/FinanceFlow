@@ -95,9 +95,9 @@ async def create_transaction():
                 operation_name:
                   type: string
                   example: "Operation name"
-                operation_is_income:
-                  type: boolean
-                  example: true
+                operation_type:
+                  type: string
+                  example: "income"
                 currency_id:
                   type: string
                   format: uuid

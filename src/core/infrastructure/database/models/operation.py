@@ -1,4 +1,4 @@
-from sqlalchemy import String, Boolean
+from sqlalchemy import String, CheckConstraint, SmallInteger
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import (
     UUID as PgUUID,
@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import (
 from uuid import uuid4, UUID
 
 from core.domain.transaction.entities.operation import OperationEntity
+from core.domain.transaction.enums.operation import OperationType
 from core.infrastructure.database.models.base import (
     Base,
     created_at,
@@ -27,24 +28,31 @@ class Operation(Base):
         unique=True,
         index=True,
     )
-    is_income: Mapped[bool] = mapped_column(
-        Boolean,
+    operation_type: Mapped[OperationType] = mapped_column(
+        SmallInteger,
         nullable=False,
+        comment="0 - income, 1 - expense, 2 - investment",
     )
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
+
+    __table_args__ = (
+        CheckConstraint(
+            "operation_type IN (0, 1, 2)", name="operation_type_check"
+        ),
+    )
 
     @staticmethod
     def from_entity(operation: OperationEntity) -> "Operation":
         return Operation(
             operation_id=operation.operation_id,
             operation_name=operation.operation_name,
-            is_income=operation.is_income,
+            operation_type=operation.operation_type.value,
         )
 
     def to_entity(self) -> OperationEntity:
         return OperationEntity(
             operation_id=self.operation_id,
             operation_name=self.operation_name,
-            is_income=self.is_income,
+            operation_type=OperationType(self.operation_type),
         )

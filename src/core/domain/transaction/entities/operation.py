@@ -1,12 +1,14 @@
 from dataclasses import dataclass
 from uuid import UUID
 
+from core.domain.transaction.enums.operation import OperationType
+
 
 @dataclass
 class OperationEntity:
     operation_id: UUID
     operation_name: str
-    is_income: bool
+    operation_type: OperationType
 
     def __post_init__(self):
         self._validate()

@@ -20,7 +20,7 @@ class CreateOperationUseCase:
         """
         entity = OperationFactory.create(
             operation_name=request.operation_name,
-            is_income=request.is_income,
+            operation_type=request.operation_type,
         )
         entity = await self._operation_repository.save(entity)
         return OperationDTO.from_entity(entity)

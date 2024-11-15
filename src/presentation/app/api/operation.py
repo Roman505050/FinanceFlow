@@ -48,9 +48,9 @@ async def create_operation():
             operation_name:
               type: string
               example: "Operation Name"
-            is_income:
-              type: boolean
-              example: true
+              operation_type:
+                type: string
+                example: "income | expense | investment"
     responses:
       201:
         description: Operation created
@@ -66,6 +66,9 @@ async def create_operation():
                 operation_name:
                   type: string
                   example: "Operation Name"
+                operation_type:
+                  type: string
+                  example: "income"
       400:
         description: Invalid body
         schema:
@@ -219,7 +222,10 @@ async def create_operation():
             500,
         )
 
-    return jsonify({"ok": True, "operation": operation.model_dump()}), 201
+    return (
+        jsonify({"ok": True, "operation": operation.model_dump(mode="json")}),
+        201,
+    )
 
 
 @operation_api_bp.route("/<uuid:operation_id>", methods=["DELETE"])
@@ -421,9 +427,9 @@ async def get_all_operations():
                   operation_name:
                     type: string
                     example: "Operation Name"
-                  is_income:
-                    type: boolean
-                    example: true
+                  operation_type:
+                    type: string
+                    example: "income"
       500:
         description: Internal Server Error
         schema:
@@ -467,7 +473,8 @@ async def get_all_operations():
             {
                 "ok": True,
                 "operations": [
-                    operation.model_dump() for operation in operations
+                    operation.model_dump(mode="json")
+                    for operation in operations
                 ],
             }
         ),

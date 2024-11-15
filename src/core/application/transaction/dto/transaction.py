@@ -1,9 +1,14 @@
 from pydantic import BaseModel, Field
 from uuid import UUID
 from decimal import Decimal
+from typing import Literal
 import datetime
 
 from core.domain.transaction.entities.transaction import TransactionEntity
+from core.domain.transaction.enums.operation import (
+    OperationType,
+    get_operation_type_string,
+)
 
 
 class CreateTransactionDTO(BaseModel):
@@ -22,7 +27,7 @@ class TransactionDTO(BaseModel):
     category_name: str
     operation_id: UUID
     operation_name: str
-    operation_is_income: bool
+    operation_type: Literal["income", "expense", "investment"]
     currency_id: UUID
     currency_name: str
     currency_code: str
@@ -40,7 +45,9 @@ class TransactionDTO(BaseModel):
             category_name=entity.category.category_name,
             operation_id=entity.category.operation.operation_id,
             operation_name=entity.category.operation.operation_name,
-            operation_is_income=entity.category.operation.is_income,
+            operation_type=get_operation_type_string(
+                entity.category.operation.operation_type
+            ),
             currency_id=entity.money.currency.currency_id,
             currency_name=entity.money.currency.currency_name,
             currency_code=entity.money.currency.currency_code,

@@ -6,6 +6,7 @@
     --color-income: #10b981;
     --color-expense: #ef4444;
     --color-danger: #dc2626;
+    --color-investment: #9449de;
 }
 
 .container {
@@ -60,6 +61,18 @@ tr:last-child td {
 
 .badge-expense {
     background-color: var(--color-expense);
+}
+
+.badge-investment {
+    background-color: var(--color-investment);
+}
+
+.no-transactions-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .amount-income {
@@ -164,25 +177,6 @@ tr:last-child td {
     }
     100% {
         transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-    }
-}
-
-.delete-loader {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid var(--color-primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
     }
 }
 

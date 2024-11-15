@@ -28,7 +28,7 @@ class OperationRepository(IOperationRepository):
         stmt = insert(self.model).values(
             operation_id=operation.operation_id,
             operation_name=operation.operation_name,
-            is_income=operation.is_income,
+            operation_type=operation.operation_type.value,
         )
         try:
             await self._session.execute(stmt)

@@ -12,7 +12,7 @@ operationForm.addEventListener('submit', async (event) => {
     }
 
     const name = newOperationInput.value.trim();
-    const type = document.querySelector('input[name="operationType"]:checked').value === 'true';
+    const type = document.querySelector('input[name="operationType"]:checked').value;
 
     try {
         const response = await fetch('/api/v1/operation', {
@@ -22,19 +22,19 @@ operationForm.addEventListener('submit', async (event) => {
             },
             body: JSON.stringify({
                 operation_name: name,
-                is_income: type,
+                operation_type: type,
             }),
         });
 
         if (response.status === 201) {
             newOperationInput.value = '';
-            document.querySelector('input[name="operationType"][value="true"]').checked = true;
+            document.querySelector('input[name="operationType"][value="income"]').checked = true;
             getOperations();
         } else {
-            console.error('Помилка при додаванні операції:', response.statusText);
+            console.error('Error creating operation:', response);
         }
     } catch (error) {
-        console.error('Помилка мережі:', error);
+        console.error('Error creating operation:', error);
     }
 });
 
@@ -63,13 +63,15 @@ async function getOperations() {
             operations.forEach(operation => {
                 const operationItem = document.createElement('tr');
                 operationItem.classList.add('operation-item');
+                operationItem.id = `operation-${operation.operation_id}`;
                 operationItem.innerHTML = `
                     <td class="operation-name">${operation.operation_name}</td>
-                    <td class="operation-type">${operation.is_income ? 'Надходження' : 'Витрати'}</td>
+                    <td class="operation-type">${operation.operation_type === "income" ? 'Дохід' : operation.operation_type === "expense" ? 'Витрата' : 'Інвестиція'}</td>
                     <td class="operation-actions">
                         <button class="delete-btn" data-id="${operation.operation_id}">
                             <i class="fas fa-trash"></i>
                         </button>
+                        <div class="delete-loader hidden" id="delete-loader-${operation.operation_id}"></div>
                     </td>
                 `;
                 operationsList.appendChild(operationItem);
@@ -88,23 +90,37 @@ operationsList.addEventListener('click', async (event) => {
         const deleteBtn = event.target.closest('.delete-btn');
         const operationId = deleteBtn.dataset.id;
 
+        const deleteLoader = document.getElementById(`delete-loader-${operationId}`);
+        const trashIcon = deleteBtn.querySelector('i');
+
+        trashIcon.classList.add('hidden');
+        deleteLoader.classList.remove('hidden');
+        deleteBtn.disabled = true;
+        deleteBtn.classList.add('hidden');
+
         try {
             const response = await fetch(`/api/v1/operation/${operationId}`, {
                 method: 'DELETE'
             });
 
             if (response.status === 200) {
-                for (const operationItem of document.querySelectorAll('.operation-item')) {
-                    if (operationItem.querySelector('.delete-btn').dataset.id === operationId) {
-                        operationItem.remove();
-                        break;
-                    }
-                }
+                const operationItem = document.getElementById(`operation-${operationId}`);
+                operationItem.remove();
+                showToast('Операцію успішно видалено', 'success');
             } else {
                 showToast('Помилка видалення операції', 'error');
+                trashIcon.classList.remove('hidden');
+                deleteBtn.disabled = false;
+                deleteBtn.classList.remove('hidden');
+                deleteLoader.classList.add('hidden');
             }
         } catch (error) {
             console.error('Error deleting operation:', error);
+            showToast('Помилка видалення операції', 'error');
+            trashIcon.classList.remove('hidden');
+            deleteBtn.disabled = false;
+            deleteBtn.classList.remove('hidden');
+            deleteLoader.classList.add('hidden');
         }
     }
 });

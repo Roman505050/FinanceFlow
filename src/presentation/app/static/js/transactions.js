@@ -22,7 +22,6 @@ async function fetchTransactions() {
         showToast('Помилка завантаження даних', 'error');
     } finally {
         document.getElementById('loaderContainer').classList.add('hidden');
-        document.getElementById('transactionTable').classList.remove('hidden');
     }
 }
 
@@ -62,13 +61,13 @@ function createTransactionRow(transaction) {
     row.innerHTML = `
                 <td data-label="Дата">${formatDate(transaction.date)}</td>
                 <td data-label="Операція">
-                    <span class="badge badge-${transaction.operation_is_income ? 'income' : 'expense'}">
-                        ${transaction.operation_is_income ? '↑' : '↓'} ${transaction.operation_name}
+                    <span class="badge badge-${transaction.operation_type}">
+                        ${transaction.operation_type === 'income' ? '↑' : transaction.operation_type === 'expense' ? '↓' : '$'} ${transaction.operation_name}
                     </span>
                 </td>
                 <td data-label="Категорія">${transaction.category_name}</td>
-                <td data-label="Сума" class="amount-${transaction.operation_is_income ? 'income' : 'expense'}">
-                    ${transaction.operation_is_income ? '+' : '-'}${transaction.amount} ${transaction.currency_symbol}
+                <td data-label="Сума" class="amount-${transaction.operation_type}">
+                    ${transaction.operation_type === 'income' ? '+' : transaction.operation_type === 'expense' ? '-' : ''}${transaction.amount} ${transaction.currency_symbol}
                 </td>
                 <td data-label="Опис">
                     <button class="description-button" data-id="${transaction.transaction_id}">
@@ -101,13 +100,22 @@ function populateTable() {
     const tableBody = document.querySelector('#transactionTable tbody');
     tableBody.innerHTML = '';
 
-    transactions.forEach(transaction => {
-        tableBody.appendChild(createTransactionRow(transaction));
-        tableBody.appendChild(createDescriptionRow(transaction));
-    });
+    const noTransactionsMessage = document.querySelector('.no-transactions-message');
 
-    setupDescriptionToggle();
-    setupDeleteButtons();
+    if (transactions.length === 0) {
+        noTransactionsMessage.style.display = 'block';
+        document.getElementById('transactionTable').classList.add('hidden');
+    } else {
+        noTransactionsMessage.style.display = 'none';
+        document.getElementById('transactionTable').classList.remove('hidden');
+        transactions.forEach(transaction => {
+            tableBody.appendChild(createTransactionRow(transaction));
+            tableBody.appendChild(createDescriptionRow(transaction));
+        });
+        setupDescriptionToggle();
+        setupDeleteButtons();
+        document.getElementById('transactionTable').classList.remove('hidden');
+    }
 }
 
 function setupDescriptionToggle() {
@@ -144,6 +152,11 @@ function setupDeleteButtons() {
                 transactions = transactions.filter(t => t.transaction_id !== id);
                 document.getElementById(`transaction-${id}`).remove();
                 document.getElementById(`description-${id}`).remove();
+
+                if (transactions.length === 0) {
+                    document.querySelector('.no-transactions-message').style.display = 'block';
+                    document.getElementById('transactionTable').classList.add('hidden');
+                }
             } else {
                 trashIcon.classList.remove('hidden');
                 deleteButton.disabled = false;
