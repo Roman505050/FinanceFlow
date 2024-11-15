@@ -28,111 +28,81 @@
     font-size: 0.875rem;
 }
 
-
 .operations-list {
+    width: 100%;
     border: 1px solid #eee;
     border-radius: 6px;
+    overflow-x: auto;
 }
 
-.operation-header {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    padding: 1rem;
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
     background: #f9f9f9;
-    border-bottom: 1px solid #eee;
     font-weight: 500;
     color: #666;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+td:last-child {
     text-align: center;
 }
 
-.operation-header span:first-child {
-    text-align: left;
+.no-operations-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
-.operation-item {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-}
-
-.operation-item:last-child {
-    border-bottom: none;
-}
-
-.operation-name {
-    text-align: left;
-}
-
-.operation-type {
+.radio-group {
     display: flex;
-    justify-content: center;
+    gap: 1rem;
     align-items: center;
 }
 
-.type {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.radio-group label {
     font-size: 0.875rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.type i {
-    font-size: 0.75rem;
+.radio-group input {
+    accent-color: #4a90e2;
 }
 
-.type.expense {
-    color: #dc3545;
-}
-
-.type.expense i {
-    color: #dc3545;
-}
-
-.type.income {
-    color: #28a745;
-}
-
-.type.income i {
-    color: #28a745;
-}
-
-
+/* Loader styles */
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
     }
 
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .input-group {
-        flex-direction: column;
-    }
-
-    .operation-header, .category-item {
-        grid-template-columns: 1fr 120px;
-    }
-
-    .type {
-        font-size: 0.75rem;
+    table {
+        font-size: 0.875rem;
     }
 }
 
 @media (max-width: 480px) {
-    .operation-header, .operation-item {
-        grid-template-columns: 1fr 100px;
+    table {
+        font-size: 0.75rem;
     }
 
-    .operation-type {
-        width: 30px;
-        height: 30px;
-        font-size: 0.875rem;
-    }
-
-    .type {
-        gap: 4px;
+    td, th {
+        padding: 0.5rem;
     }
 }
