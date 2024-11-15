@@ -18,6 +18,7 @@ from presentation.app.api.transaction import transaction_api_bp
 from config import SESSION_SECRET_KEY
 
 app = Flask(__name__)
+app.json.ensure_ascii = False  # type: ignore[attr-defined]
 app.secret_key = SESSION_SECRET_KEY
 
 swagger = Swagger(app)

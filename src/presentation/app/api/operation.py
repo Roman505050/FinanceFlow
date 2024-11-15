@@ -84,24 +84,103 @@ async def create_operation():
                   - "Missing data for required field."
                 is_income:
                   - "Missing data for required field."
+      401:
+        description: Unauthorized
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "UNAUTHORIZED"
+                message:
+                  type: string
+                  example: "Missing authentication token"
+      403:
+        description: Forbidden
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "FORBIDDEN"
+                message:
+                  type: string
+                  example: "You don't have permission to access this resource"
+      500:
+        description: Internal Server Error
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "INTERNAL_ERROR"
+                message:
+                  type: string
+                  example: "Something went wrong"
     """
     try:
         user = await get_current_user(session)
         if user is None:
-            return jsonify({"ok": False, "message": "UNAUTHORIZED"}), 401
-        if not has_permissions(user, ["admin"]):
-            return jsonify({"ok": False, "message": "FORBIDDEN"}), 403
-
-        body = request.get_json()
-        try:
-            operation = CreateOperationDTO(**body)
-        except ValidationError as error:
             return (
                 jsonify(
                     {
                         "ok": False,
-                        "message": "INVALID_BODY",
-                        "errors": get_parsed_errors(error),
+                        "error": {
+                            "type": "UNAUTHORIZED",
+                            "message": "Missing authentication token",
+                        },
+                    }
+                ),
+                401,
+            )
+        if not has_permissions(user, ["admin"]):
+            return (
+                jsonify(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "FORBIDDEN",
+                            "message": (
+                                "You don't have permission "
+                                "to access this resource"
+                            ),
+                        },
+                    }
+                ),
+                403,
+            )
+
+        body = request.get_json()
+        try:
+            operation = CreateOperationDTO(**body)
+        except ValidationError as e:
+            return (
+                jsonify(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "INVALID_BODY",
+                            "message": "Invalid body",
+                            "errors": get_parsed_errors(e),
+                        },
                     }
                 ),
                 400,
@@ -112,14 +191,33 @@ async def create_operation():
             use_case = CreateOperationUseCase(operation_repository)
             try:
                 operation = await use_case.execute(operation)
-            except OperationAlreadyExistException as error:
+            except OperationAlreadyExistException as e:
                 return (
-                    jsonify({"ok": False, "message": str(error)}),
+                    jsonify(
+                        {
+                            "ok": False,
+                            "error": {
+                                "type": "ALREADY_EXIST",
+                                "message": str(e),
+                            },
+                        }
+                    ),
                     400,
                 )
-    except Exception as error:
-        logger.error(error)
-        return jsonify({"ok": False, "message": "INTERNAL_SERVER_ERROR"}), 500
+    except Exception as e:
+        logger.error(e)
+        return (
+            jsonify(
+                {
+                    "ok": False,
+                    "error": {
+                        "type": "INTERNAL_ERROR",
+                        "message": "Something went wrong",
+                    },
+                }
+            ),
+            500,
+        )
 
     return jsonify({"ok": True, "operation": operation.model_dump()}), 201
 
@@ -138,73 +236,160 @@ async def delete_operation(operation_id: UUID):
           type: uuid
           example: "00000000-0000-0000-0000-000000000000"
     responses:
-        200:
-            description: Operation deleted
-            schema:
-                type: object
-                properties:
-                    ok:
-                        type: boolean
-                        example: true
-        400:
-            description: Operation not found
-            schema:
-                type: object
-                properties:
-                    ok:
-                        type: boolean
-                        example: false
-                    message:
-                        type: string
-                        example: "Operation not found"
-        401:
-            description: Unauthorized
-            schema:
-                type: object
-                properties:
-                    ok:
-                        type: boolean
-                        example: false
-                    message:
-                        type: string
-                        example: "UNAUTHORIZED"
-        403:
-            description: Forbidden
-            schema:
-                type: object
-                properties:
-                    ok:
-                        type: boolean
-                        example: false
-                    message:
-                        type: string
-                        example: "FORBIDDEN"
+      200:
+        description: Operation deleted
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: true
+      400:
+        description: Operation not found
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "OPERATION_NOT_FOUND"
+                message:
+                  type: string
+                  example: "Operation not found"
+      401:
+        description: Unauthorized
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "UNAUTHORIZED"
+                message:
+                  type: string
+                  example: "Missing authentication token"
+      403:
+        description: Forbidden
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "FORBIDDEN"
+                message:
+                  type: string
+                  example: "You don't have permission to access this resource"
+      500:
+        description: Internal Server Error
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "INTERNAL_ERROR"
+                message:
+                  type: string
+                  example: "Something went wrong"
     """
     try:
         user = await get_current_user(session)
         if user is None:
-            return jsonify({"ok": False, "message": "UNAUTHORIZED"}), 401
+            return (
+                jsonify(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "UNAUTHORIZED",
+                            "message": "Missing authentication token",
+                        },
+                    }
+                ),
+                401,
+            )
         if not has_permissions(user, ["admin"]):
-            return jsonify({"ok": False, "message": "FORBIDDEN"}), 403
+            return (
+                jsonify(
+                    {
+                        "ok": False,
+                        "error": {
+                            "type": "FORBIDDEN",
+                            "message": (
+                                "You don't have permission "
+                                "to access this resource"
+                            ),
+                        },
+                    }
+                ),
+                403,
+            )
 
         async with SessionContextManager() as db_session:
             operation_repository = OperationRepository(db_session)
             use_case = DeleteOperationUseCase(operation_repository)
             try:
                 await use_case.execute(operation_id)
-            except OperationNotFoundException as error:
+            except OperationNotFoundException as e:
                 return (
-                    jsonify({"ok": False, "message": str(error)}),
+                    jsonify(
+                        {
+                            "ok": False,
+                            "error": {
+                                "type": "OPERATION_NOT_FOUND",
+                                "message": str(e),
+                            },
+                        }
+                    ),
                     400,
                 )
-            except OperationNotDeletableException as error:
+            except OperationNotDeletableException as e:
                 return (
-                    jsonify({"ok": False, "message": str(error)}),
+                    jsonify(
+                        {
+                            "ok": False,
+                            "error": {
+                                "type": "OPERATION_NOT_DELETABLE",
+                                "message": str(e),
+                            },
+                        }
+                    ),
                     400,
                 )
-    except Exception as error:
-        logger.error(error)
-        return jsonify({"ok": False, "message": "INTERNAL_SERVER_ERROR"}), 500
+    except Exception as e:
+        logger.error(e)
+        return (
+            jsonify(
+                {
+                    "ok": False,
+                    "error": {
+                        "type": "INTERNAL_ERROR",
+                        "message": "Something went wrong",
+                    },
+                }
+            ),
+            500,
+        )
 
     return jsonify({"ok": True}), 200
 
@@ -239,15 +424,43 @@ async def get_all_operations():
                   is_income:
                     type: boolean
                     example: true
+      500:
+        description: Internal Server Error
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "INTERNAL_ERROR"
+                message:
+                  type: string
+                  example: "Something went wrong"
     """
     try:
         async with SessionContextManager() as db_session:
             operation_repository = OperationRepository(db_session)
             use_case = GetAllOperationUseCase(operation_repository)
             operations = await use_case.execute()
-    except Exception as error:
-        logger.error(error)
-        return jsonify({"ok": False, "message": "INTERNAL_SERVER_ERROR"}), 500
+    except Exception as e:
+        logger.error(e)
+        return (
+            jsonify(
+                {
+                    "ok": False,
+                    "error": {
+                        "type": "INTERNAL_ERROR",
+                        "message": "Something went wrong",
+                    },
+                }
+            ),
+            500,
+        )
 
     return (
         jsonify(
@@ -284,22 +497,43 @@ async def autocomplete_operation():
               value:
                 type: string
                 example: "00000000-0000-0000-0000-000000000000"
-              payload:
-                type: object
-                properties:
-                  is_positive:
-                    type: boolean
-                    example: true
+      500:
+        description: Internal Server Error
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: false
+            error:
+              type: object
+              properties:
+                type:
+                  type: string
+                  example: "INTERNAL_ERROR"
+                message:
+                  type: string
+                  example: "Something went wrong"
     """
     try:
         async with SessionContextManager() as db_session:
             operation_repository = OperationRepository(db_session)
             use_case = GetAllOperationUseCase(operation_repository)
             operations = await use_case.execute()
-    except Exception as error:
-        raise error
-        logger.error(error)
-        return jsonify({"ok": False, "message": "INTERNAL_SERVER_ERROR"}), 500
+    except Exception as e:
+        logger.error(e)
+        return (
+            jsonify(
+                {
+                    "ok": False,
+                    "error": {
+                        "type": "INTERNAL_ERROR",
+                        "message": "Something went wrong",
+                    },
+                }
+            ),
+            500,
+        )
 
     return (
         jsonify(

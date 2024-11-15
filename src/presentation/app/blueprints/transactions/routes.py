@@ -20,4 +20,4 @@ def transactions_home():
     if user_id is None:
         return redirect(url_for("auth.login"))
 
-    return render_template("transactions/home.html")
+    return render_template("transactions.html")

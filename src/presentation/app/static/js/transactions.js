@@ -1,4 +1,4 @@
-import {showToast} from "../toast.js";
+import {showToast} from "./toast.js";
 
 let transactions = [];
 

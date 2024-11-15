@@ -3,7 +3,7 @@
 {% block title %}Мої Транзакції{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/transactions/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/transactions.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 {% endblock %}
@@ -95,6 +95,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="module" src="{{ url_for('static', filename='js/transactions/home.js') }}"></script>
-<script type="module" src="{{ url_for('static', filename='js/transactions/home-modal.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/transactions.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/create-transaction-modal.js') }}"></script>
 {% endblock %}

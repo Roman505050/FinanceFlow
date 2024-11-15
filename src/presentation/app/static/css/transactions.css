@@ -141,18 +141,30 @@ tr:last-child td {
 }
 
 @keyframes rotate-one {
-    0% { transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg); }
-    100% { transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg); }
+    0% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
 }
 
 @keyframes rotate-two {
-    0% { transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg); }
-    100% { transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg); }
+    0% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
 }
 
 @keyframes rotate-three {
-    0% { transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg); }
-    100% { transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg); }
+    0% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
 }
 
 .delete-loader {
@@ -166,8 +178,12 @@ tr:last-child td {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .hidden {
@@ -187,14 +203,16 @@ tr:last-child td {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 500px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .close {
