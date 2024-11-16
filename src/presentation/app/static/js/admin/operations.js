@@ -32,9 +32,11 @@ operationForm.addEventListener('submit', async (event) => {
             getOperations();
         } else {
             console.error('Error creating operation:', response);
+            showToast('Помилка при створенні операції', 'error');
         }
     } catch (error) {
         console.error('Error creating operation:', error);
+        showToast('Помилка при створенні операції', 'error');
     }
 });
 
@@ -109,14 +111,11 @@ operationsList.addEventListener('click', async (event) => {
                 showToast('Операцію успішно видалено', 'success');
             } else {
                 showToast('Помилка видалення операції', 'error');
-                trashIcon.classList.remove('hidden');
-                deleteBtn.disabled = false;
-                deleteBtn.classList.remove('hidden');
-                deleteLoader.classList.add('hidden');
             }
         } catch (error) {
             console.error('Error deleting operation:', error);
             showToast('Помилка видалення операції', 'error');
+        } finally {
             trashIcon.classList.remove('hidden');
             deleteBtn.disabled = false;
             deleteBtn.classList.remove('hidden');
