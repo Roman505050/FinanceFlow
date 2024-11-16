@@ -1,0 +1,19 @@
+{% macro render_input(field, size=32, css_class="form-control", pattern="", title="") %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        {{ field.label }}
+
+        {% if pattern %}
+            {{ field(size=size, class_=css_class, pattern=pattern, title=title) }}
+        {% else %}
+            {{ field(size=size, class_=css_class) }}
+        {% endif %}
+
+        {% if field.errors %}
+        <div class="error-message">
+            {% for error in field.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+{% endmacro %}

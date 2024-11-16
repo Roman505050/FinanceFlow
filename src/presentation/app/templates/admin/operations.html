@@ -1,0 +1,73 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Керування операціями | Finance Flow{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/operations.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="operations-section">
+        <h2>Керування операціями</h2>
+
+        <form id="operationForm">
+            <div class="operation-form">
+                <div class="input-group">
+                    <input type="text" id="newOperation" placeholder="Введіть назву нової операції" minlength="3"
+                           maxlength="40" required>
+
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="operationType" value="income" checked> Доходи
+                        </label>
+                        <label>
+                            <input type="radio" name="operationType" value="expense"> Витрата
+                        </label>
+                        <label>
+                            <input type="radio" name="operationType" value="investment"> Інвестиції
+                        </label>
+                    </div>
+
+                    <button class="add-btn" type="submit">
+                        <span>+</span>
+                        Додати
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div id="loaderСontainer" class="loader-container">
+            <div class="custom-loader">
+                <div class="inner one"></div>
+                <div class="inner two"></div>
+                <div class="inner three"></div>
+            </div>
+        </div>
+        <div class="operations-list hidden" id="operationsList">
+            <table>
+                <thead>
+                <tr>
+                    <th>Назва операції</th>
+                    <th>Тип</th>
+                    <th>Дії</th>
+                </tr>
+                </thead>
+                <tbody class="operations-body">
+                <!-- Dynamic content will be added here -->
+                </tbody>
+            </table>
+
+            <div class="no-operations-message" style="display: none;">
+                <p>Немає операцій для відображення.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/admin/operations.js') }}"></script>
+{% endblock %}

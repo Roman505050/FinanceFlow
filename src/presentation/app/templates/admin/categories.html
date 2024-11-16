@@ -1,0 +1,62 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Керування категоріями | Finance Flow{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/categories.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="categories-section">
+        <h2>Керування категоріями</h2>
+
+        <form id="categoryForm">
+            <div class="category-form">
+                <div class="input-group">
+                    <input type="text" id="newCategory" name="newCategory" placeholder="Введіть назву нової категорії"
+                           required minlength="3" maxlength="64">
+                    <select id="operationType" name="operationType" required>
+                        <option value="" selected>Виберіть тип</option>
+                    </select>
+                    <button type="submit" id="submitBtn" class="add-btn">
+                        <span>+</span>
+                        Додати
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div id="loaderСontainer" class="loader-container">
+            <div class="custom-loader">
+                <div class="inner one"></div>
+                <div class="inner two"></div>
+                <div class="inner three"></div>
+            </div>
+        </div>
+
+        <div class="categories-list hidden" id="categoriesList">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Назва категорії</th>
+                        <th>Тип</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody id="categoryItems"></tbody>
+            </table>
+
+            <div class="no-categories-message" style="display: none;">
+                <p>Немає категорій для відображення.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/admin/categories.js') }}"></script>
+{% endblock %}

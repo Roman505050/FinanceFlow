@@ -1,0 +1,108 @@
+.operations-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.operations-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.operation-form {
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.input-group input, .input-group select {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.875rem;
+}
+
+.operations-list {
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f9f9f9;
+    font-weight: 500;
+    color: #666;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+th:first-child, td:first-child {
+    text-align: left;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+.no-operations-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.radio-group label {
+    font-size: 0.875rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.radio-group input {
+    accent-color: #4a90e2;
+}
+
+/* Loader styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    table {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        font-size: 0.75rem;
+    }
+
+    td, th {
+        padding: 0.5rem;
+    }
+}

@@ -17,6 +17,9 @@ asyncpg = "^0.30.0"
 python-dotenv = "^1.0.1"
 gunicorn = "^23.0.0"
 loguru = "^0.7.2"
+flasgger = "^0.9.7.1"
+asgiref = "^3.8.1"
+hypercorn = "^0.17.3"
 
 
 [tool.poetry.group.dev.dependencies]

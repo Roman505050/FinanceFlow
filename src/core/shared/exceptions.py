@@ -4,3 +4,7 @@ class NotFoundException(Exception):
 
 class AlreadyExistsException(Exception):
     pass
+
+
+class ForbiddenException(Exception):
+    pass

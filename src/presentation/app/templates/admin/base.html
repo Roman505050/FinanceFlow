@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Finance Flow - Адміністратор{% endblock %}
+
+{% block header %}
+<header>
+    <nav class="container">
+        <div class="logo">Finance Flow Admin</div>
+        <ul class="nav-links">
+            <li><a href="/admin">Головна Панель</a></li>
+            <li><a href="/admin/categories">Категорії</a></li>
+            <li><a href="/admin/currencies">Валюти</a></li>
+            <li><a href="/admin/operations">Операції</a></li>
+        </ul>
+        <div class="auth-buttons">
+            {% if session.get('username') %}
+                <form action="/logout" method="POST">
+                    <button type="submit" class="logout">Вийти</button>
+                </form>
+            {% else %}
+                <a href="/login" class="login">Увійти</a>
+                <a href="/register" class="register">Зареєструватися</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

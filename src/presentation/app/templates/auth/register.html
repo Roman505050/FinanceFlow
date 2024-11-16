@@ -1,0 +1,43 @@
+{% from "macros/forms.html" import render_input %}
+
+{% extends 'base.html' %}
+
+{% block title %}Реєстрація{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/register.css') }}">
+{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+<section id="register">
+    <div class="container">
+        <div class="register-form">
+            <h2>Реєстрація</h2>
+            <form method="POST" action="{{ url_for('auth.register') }}" id="registerForm">
+                {{ form.hidden_tag() }}
+                {{ render_input(form.username, 32, "form-control", "^[a-zA-Z0-9_]+$", "Username must only contain letters, numbers, and underscores") }}
+                {{ render_input(form.email, 32, "form-control") }}
+                {{ render_input(form.password, 32, "form-control") }}
+                {{ render_input(form.password2, 32, "form-control") }}
+                <div class="form-group">
+                    {{ form.submit(class_="cta-button") }}
+                </div>
+            </form>
+            <p>Вже зареєстровані? <a href="/login">Увійти</a></p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='js/auth/register.js') }}"></script>
+{% endblock %}
+

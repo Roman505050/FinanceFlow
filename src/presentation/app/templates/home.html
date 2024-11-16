@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
 {% block content %}
     {% if session.get('username') %}
         <section id="hero">
@@ -49,4 +53,8 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
 {% endblock %}

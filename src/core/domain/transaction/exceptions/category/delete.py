@@ -1,0 +1,2 @@
+class CategoryNotDeletableException(Exception):
+    pass

@@ -4,57 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block styles %}{% endblock %}
 </head>
 <body>
-<header>
-    <nav class="container">
-        <div class="logo">Finance Flow</div>
-        {% if not hide_nav %}
-            <ul class="nav-links">
-                <li><a href="/">Головна</a></li>
-                <li><a href="/transactions">Мої транзакції</a></li>
-                <li><a href="/statistics">Статистика</a></li>
-            </ul>
-            <div class="auth-buttons">
-                {% if session.get('username') %}
-                <form action="/logout" method="POST">
-                    <button type="submit" class="logout">Вийти</button>
-                </form>
-                {% else %}
-                <a href="/login" class="login">Увійти</a>
-                <a href="/register" class="register">Зареєструватися</a>
-                {% endif %}
-            </div>
-        {% endif %}
-    </nav>
-</header>
-
-<main>
-    {% block content %}
-    <!-- Content goes here -->
+    {% block header %}
+    <!-- Header goes here -->
     {% endblock %}
-    <div id="toast-container"></div>
-</main>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2023 Finance Flow. Усі права захищені.</p>
-    </div>
-</footer>
+    <main>
+        {% block content %}
+        <!-- Content goes here -->
+        {% endblock %}
+        <div id="toast-container"></div>
+    </main>
 
-
-<script src="{{ url_for('static', filename='js/toast.js') }}"></script>
-<script>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            handleFlashedMessages({{ messages|tojson }});
-        {% endif %}
-    {% endwith %}
-</script>
-{% block scripts %}
-{% endblock %}
+    {% block footer %}
+    <!-- Footer goes here -->
+    {% endblock %}
+    <script type="module" src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+             document.addEventListener('DOMContentLoaded', function() {
+                handleFlashedMessages({{ messages|tojson }});
+            });
+            {% endif %}
+        {% endwith %}
+    </script>
+    {% block scripts %}
+    <!-- Scripts go here -->
+    {% endblock %}
 </body>
 </html>
