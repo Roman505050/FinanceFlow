@@ -282,6 +282,14 @@ tr:last-child td {
     border-width: 2px;
 }
 
+textarea {
+    resize: vertical;
+    height: auto;
+    min-height: 100px;
+    max-height: 200px;
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     table, thead, tbody, th, td, tr {
         display: block;

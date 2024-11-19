@@ -10,7 +10,7 @@ async function fetchOperations() {
         operationTypeSelect.innerHTML = '<option value="" disabled selected>Завантаження...</option>';
         operationTypeSelect.disabled = true;
 
-        const response = await fetch('/api/v1/operation/autocomplete');
+        const response = await fetch('/api/v1/operations/autocomplete');
         if (!response.ok) {
             console.error('Error fetching operation types:', response);
             showToast('Помилка завантаження типів категорій', 'error');
@@ -37,7 +37,7 @@ async function fetchOperations() {
 
 async function createCategory(newCategory, operationType) {
     try {
-        const response = await fetch('/api/v1/category', {
+        const response = await fetch('/api/v1/categories', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ async function fetchCategories() {
         document.getElementById('loaderСontainer').classList.remove('hidden');
         document.getElementById('categoriesList').classList.add('hidden');
 
-        const response = await fetch('/api/v1/category');
+        const response = await fetch('/api/v1/categories');
         if (!response.ok) {
             console.error('Error fetching categories:', response);
             showToast('Помилка при завантаженні категорій', 'error');
@@ -139,7 +139,7 @@ categoryItemsContainer.addEventListener('click', async (event) => {
         deleteBtn.classList.add('hidden');
 
         try {
-            const response = await fetch(`/api/v1/category/${categoryId}`, {
+            const response = await fetch(`/api/v1/categories/${categoryId}`, {
                 method: 'DELETE'
             });
 

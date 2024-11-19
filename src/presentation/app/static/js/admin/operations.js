@@ -15,7 +15,7 @@ operationForm.addEventListener('submit', async (event) => {
     const type = document.querySelector('input[name="operationType"]:checked').value;
 
     try {
-        const response = await fetch('/api/v1/operation', {
+        const response = await fetch('/api/v1/operations', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ async function getOperations() {
         document.getElementById('loaderСontainer').classList.remove('hidden');
         document.getElementById('operationsList').classList.add('hidden');
 
-        const response = await fetch('/api/v1/operation');
+        const response = await fetch('/api/v1/operations');
         if (!response.ok) {
             console.error('Error fetching operations:', response);
             showToast('Помилка завантаження даних', 'error');
@@ -101,7 +101,7 @@ operationsList.addEventListener('click', async (event) => {
         deleteBtn.classList.add('hidden');
 
         try {
-            const response = await fetch(`/api/v1/operation/${operationId}`, {
+            const response = await fetch(`/api/v1/operations/${operationId}`, {
                 method: 'DELETE'
             });
 

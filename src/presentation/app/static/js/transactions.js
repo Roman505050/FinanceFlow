@@ -7,7 +7,7 @@ async function fetchTransactions() {
         document.getElementById('loaderContainer').classList.remove('hidden');
         document.getElementById('transactionTable').classList.add('hidden');
 
-        const response = await fetch('/api/v1/transaction/me');
+        const response = await fetch('/api/v1/transactions/me');
         if (!response.ok) {
             console.error('Fetch error:', response);
             showToast('Помилка завантаження даних', 'error');
@@ -27,7 +27,7 @@ async function fetchTransactions() {
 
 async function deleteTransaction(transactionId) {
     try {
-        const response = await fetch(`/api/v1/transaction/${transactionId}`, {
+        const response = await fetch(`/api/v1/transactions/${transactionId}`, {
             method: 'DELETE'
         });
         if (response.ok) {

@@ -32,7 +32,7 @@ async function fetchOperations() {
     operationSelect.disabled = true;
 
     try {
-        const response = await fetch('api/v1/operation/autocomplete');
+        const response = await fetch('api/v1/operations/autocomplete');
         const data = await response.json();
 
         operationSelect.innerHTML = '<option value="">Виберіть операцію</option>';
@@ -54,7 +54,7 @@ async function fetchCurrencies() {
     currencySelect.disabled = true;
 
     try {
-        const response = await fetch('api/v1/currency/autocomplete');
+        const response = await fetch('api/v1/currencies/autocomplete');
         const data = await response.json();
 
         currencySelect.innerHTML = '<option value="">Виберіть валюту</option>';
@@ -76,7 +76,7 @@ async function fetchCategories(operationId) {
     categorySelect.disabled = true;
 
     try {
-        const response = await fetch(`api/v1/category/autocomplete?operation_id=${operationId}`);
+        const response = await fetch(`api/v1/categories/autocomplete?operation_id=${operationId}`);
         const data = await response.json();
 
         if (operationSelect.value !== operationId) {
@@ -101,7 +101,7 @@ async function fetchCategories(operationId) {
 
 async function saveTransaction(transaction) {
     try {
-        const response = await fetch('api/v1/transaction', {
+        const response = await fetch('api/v1/transactions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
