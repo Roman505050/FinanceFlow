@@ -30,9 +30,3 @@ class CurrencyEntity:
             raise ValueError(
                 "Currency code must be a 3-letter uppercase string"
             )
-
-    def __eq__(self, other):
-        return self.currency_id == other.currency_id
-
-    def __ne__(self, other):
-        return self.currency_id != other.currency_id
