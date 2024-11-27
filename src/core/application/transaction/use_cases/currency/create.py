@@ -1,8 +1,10 @@
+from uuid import uuid4
+
 from core.application.transaction.dto.currency import (
     CreateCurrencyDTO,
     CurrencyDTO,
 )
-from core.application.transaction.factories.currency import CurrencyFactory
+from core.domain.transaction.entities.currency import CurrencyEntity
 from core.domain.transaction.repositories.currency import ICurrencyRepository
 
 
@@ -18,7 +20,8 @@ class CreateCurrencyUseCase:
                                                already exists.
         :return: The created currency.
         """
-        entity = CurrencyFactory.create(
+        entity = CurrencyEntity(
+            currency_id=uuid4(),
             currency_name=request.currency_name,
             currency_symbol=request.currency_symbol,
             currency_code=request.currency_code,

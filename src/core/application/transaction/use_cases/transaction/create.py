@@ -1,15 +1,16 @@
+from uuid import uuid4
+
 from core.application.transaction.dto.transaction import (
     CreateTransactionDTO,
     TransactionDTO,
 )
-from core.application.transaction.factories.transaction import (
-    TransactionFactory,
-)
+from core.domain.transaction.entities.transaction import TransactionEntity
 from core.domain.transaction.repositories.transaction import (
     ITransactionRepository,
 )
 from core.domain.transaction.repositories.category import ICategoryRepository
 from core.domain.transaction.repositories.currency import ICurrencyRepository
+from core.domain.transaction.value_objects.money import Money
 
 
 class CreateTransactionUseCase:
@@ -39,11 +40,11 @@ class CreateTransactionUseCase:
             currency_id=request.currency_id
         )
 
-        entity = TransactionFactory.create(
+        entity = TransactionEntity(
+            transaction_id=uuid4(),
             user_id=request.user_id,
             category=category,
-            currency=currency,
-            amount=request.amount,
+            money=Money(amount=request.amount, currency=currency),
             date=request.date,
             description=request.description,
         )

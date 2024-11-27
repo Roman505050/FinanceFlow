@@ -28,7 +28,7 @@ class Operation(Base):
         unique=True,
         index=True,
     )
-    operation_type: Mapped[OperationType] = mapped_column(
+    operation_type: Mapped[int] = mapped_column(
         SmallInteger,
         nullable=False,
         comment="0 - income, 1 - expense, 2 - investment",
@@ -43,6 +43,15 @@ class Operation(Base):
     )
 
     @staticmethod
+    def _get_operation_type(operation_type: int) -> OperationType:
+        mapping = {
+            0: OperationType.INCOME,
+            1: OperationType.EXPENSE,
+            2: OperationType.INVESTMENT,
+        }
+        return mapping[operation_type]
+
+    @staticmethod
     def from_entity(operation: OperationEntity) -> "Operation":
         return Operation(
             operation_id=operation.operation_id,
@@ -54,5 +63,5 @@ class Operation(Base):
         return OperationEntity(
             operation_id=self.operation_id,
             operation_name=self.operation_name,
-            operation_type=OperationType(self.operation_type),
+            operation_type=self._get_operation_type(self.operation_type),
         )

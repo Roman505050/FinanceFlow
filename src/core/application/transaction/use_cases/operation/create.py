@@ -1,8 +1,10 @@
+from uuid import uuid4
+
 from core.application.transaction.dto.operation import (
     CreateOperationDTO,
     OperationDTO,
 )
-from core.application.transaction.factories.operation import OperationFactory
+from core.domain.transaction.entities.operation import OperationEntity
 from core.domain.transaction.repositories.operation import IOperationRepository
 
 
@@ -18,7 +20,8 @@ class CreateOperationUseCase:
                                                 already exists.
         :return: The created operation.
         """
-        entity = OperationFactory.create(
+        entity = OperationEntity(
+            operation_id=uuid4(),
             operation_name=request.operation_name,
             operation_type=request.operation_type,
         )

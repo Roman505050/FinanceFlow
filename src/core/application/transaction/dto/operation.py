@@ -1,16 +1,13 @@
 from pydantic import BaseModel, Field
-from typing import Literal
 from uuid import UUID
 
 from core.domain.transaction.entities.operation import OperationEntity
-from core.domain.transaction.enums.operation import (
-    get_operation_type_string,
-)
+from core.domain.transaction.enums.operation import OperationType
 
 
 class CreateOperationDTO(BaseModel):
     operation_name: str = Field(min_length=3, max_length=64)
-    operation_type: Literal["income", "expense", "investment"]
+    operation_type: OperationType
 
 
 class OperationDTO(CreateOperationDTO):
@@ -21,5 +18,5 @@ class OperationDTO(CreateOperationDTO):
         return OperationDTO(
             operation_id=entity.operation_id,
             operation_name=entity.operation_name,
-            operation_type=get_operation_type_string(entity.operation_type),
+            operation_type=entity.operation_type,
         )

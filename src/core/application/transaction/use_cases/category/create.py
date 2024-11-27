@@ -1,4 +1,6 @@
-from core.application.transaction.factories.category import CategoryFactory
+from uuid import uuid4
+
+from core.domain.transaction.entities.category import CategoryEntity
 from core.domain.transaction.repositories.category import ICategoryRepository
 from core.application.transaction.dto.category import (
     CategoryDTO,
@@ -29,8 +31,10 @@ class CreateCategoryUseCase:
             request.operation_id
         )
 
-        category = CategoryFactory.create(
-            category_name=request.category_name, operation=operation
+        category = CategoryEntity(
+            category_id=uuid4(),
+            category_name=request.category_name,
+            operation=operation,
         )
 
         category = await self._category_repository.save(category)
