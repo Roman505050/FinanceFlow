@@ -1,27 +1,20 @@
-from flask import (
-    Blueprint,
-    render_template,
-    redirect,
-    url_for,
-    session,
-    flash,
-)
-from pydantic import ValidationError
+from flask import Blueprint, flash, redirect, render_template, session, url_for
 from loguru import logger
+from pydantic import ValidationError
 
-from core.application.user.dto.user import RegisterUserDTO, LoginUserDTO
+from core.application.user.dto.user import LoginUserDTO, RegisterUserDTO
 from core.application.user.exceptions.invalid_credentials import (
     UserInvalidCredentialsException,
 )
 from core.application.user.factories.user import UserFactory
-from core.application.user.use_cases.register import RegisterUserUseCase
 from core.application.user.use_cases.login import LoginUserUseCase
+from core.application.user.use_cases.register import RegisterUserUseCase
 from core.infrastructure.database.core import SessionContextManager
 from core.infrastructure.repositories.role import RoleRepository
 from core.infrastructure.repositories.user import UserRepository
 from core.infrastructure.services.cryptography import CryptographyService
 from core.shared.exceptions import AlreadyExistsException
-from presentation.app.blueprints.auth.forms import RegistrationForm, LoginForm
+from presentation.app.blueprints.auth.forms import LoginForm, RegistrationForm
 
 
 auth_bp = Blueprint(

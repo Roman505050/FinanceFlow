@@ -1,10 +1,9 @@
 from sqlalchemy.ext.asyncio import (
+    AsyncSession,
     async_sessionmaker,
     create_async_engine,
-    AsyncSession,
 )
 from sqlalchemy.pool import NullPool
-
 
 from config import POSTGRES_URI
 

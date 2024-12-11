@@ -1,10 +1,4 @@
-from flask import (
-    Blueprint,
-    render_template,
-    redirect,
-    url_for,
-    session,
-)
+from flask import Blueprint, redirect, render_template, session, url_for
 
 
 transactions_bp = Blueprint(

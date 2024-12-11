@@ -1,7 +1,8 @@
-from flask.sessions import SessionMixin
-from pydantic import ValidationError
-from loguru import logger
 import json
+
+from flask.sessions import SessionMixin
+from loguru import logger
+from pydantic import ValidationError
 
 from core.application.user.dto.user import UserDTO
 from core.application.user.use_cases.get_user import GetUserUseCase

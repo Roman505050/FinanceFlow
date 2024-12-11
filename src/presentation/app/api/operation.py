@@ -1,11 +1,10 @@
-from flask import Blueprint, request, jsonify, session
-from pydantic import ValidationError
-from loguru import logger
 from uuid import UUID
 
-from core.application.transaction.dto.operation import (
-    CreateOperationDTO,
-)
+from flask import Blueprint, jsonify, request, session
+from loguru import logger
+from pydantic import ValidationError
+
+from core.application.transaction.dto.operation import CreateOperationDTO
 from core.application.transaction.use_cases.operation.create import (
     CreateOperationUseCase,
 )
@@ -27,7 +26,8 @@ from core.domain.transaction.exceptions.operation.not_found import (
 from core.infrastructure.database.core import SessionContextManager
 from core.infrastructure.repositories.operation import OperationRepository
 from presentation.app.utils.permissions import has_permissions
-from presentation.app.utils.tools import get_parsed_errors, get_current_user
+from presentation.app.utils.tools import get_current_user, get_parsed_errors
+
 
 operation_api_bp = Blueprint("operation_api", __name__)
 

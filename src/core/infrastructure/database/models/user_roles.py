@@ -1,9 +1,8 @@
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import (
-    UUID as PgUUID,
-)
 from uuid import UUID
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.dialects.postgresql import UUID as PgUUID
+from sqlalchemy.orm import Mapped, mapped_column
 
 from core.infrastructure.database.models.base import (
     Base,

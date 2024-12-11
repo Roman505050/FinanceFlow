@@ -1,13 +1,14 @@
-from sqlalchemy import select, delete, insert
+from uuid import UUID
+
+from sqlalchemy import delete, insert, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
-from uuid import UUID
 
 from core.domain.transaction.entities.currency import CurrencyEntity
 from core.domain.transaction.exceptions import (
+    CategoryNotDeletableException,
     CurrencyAlreadyExistException,
     CurrencyNotFoundException,
-    CategoryNotDeletableException,
 )
 from core.domain.transaction.repositories.currency import ICurrencyRepository
 from core.infrastructure.database.models.currency import Currency

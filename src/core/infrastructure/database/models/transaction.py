@@ -1,18 +1,14 @@
-from sqlalchemy import String, ForeignKey, DECIMAL, DateTime, CheckConstraint
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy.dialects.postgresql import (
-    UUID as PgUUID,
-)
-from decimal import Decimal
-from uuid import uuid4, UUID
 import datetime
+from decimal import Decimal
+from uuid import UUID, uuid4
 
-from core.domain.transaction.value_objects.money import Money
+from sqlalchemy import DECIMAL, CheckConstraint, DateTime, ForeignKey, String
+from sqlalchemy.dialects.postgresql import UUID as PgUUID
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from core.domain.transaction.entities.transaction import TransactionEntity
-from core.infrastructure.database.models.base import (
-    Base,
-    updated_at,
-)
+from core.domain.transaction.value_objects.money import Money
+from core.infrastructure.database.models.base import Base, updated_at
 from core.infrastructure.database.models.category import Category
 from core.infrastructure.database.models.currency import Currency
 

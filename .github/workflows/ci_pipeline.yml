@@ -39,7 +39,11 @@ jobs:
         - name: Lint with flake8
           run: |
             # Run flake8 to lint the code
-            poetry run flake8 src --max-line-length=79 --exclude='src/core/infrastructure/database/migrations/*'
+            poetry run flake8 src --max-line-length=79 --exclude='src/core/infrastructure/database/migrations/*'\
+
+        - name: Check formatting imports with isort
+          run: |
+            poetry run isort --check-only .
 
 #        - name: Test with unittest
 #          run: |

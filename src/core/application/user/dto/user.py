@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr, SecretStr, Field
 from uuid import UUID
+
+from pydantic import BaseModel, EmailStr, Field, SecretStr
 
 from core.application.user.dto.role import RoleDTO
 from core.domain.user.entities.user import UserEntity

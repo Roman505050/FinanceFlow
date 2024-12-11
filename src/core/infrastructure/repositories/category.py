@@ -1,8 +1,9 @@
-from sqlalchemy import select, delete, insert
-from sqlalchemy.orm import selectinload
+from uuid import UUID
+
+from sqlalchemy import delete, insert, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
-from uuid import UUID
+from sqlalchemy.orm import selectinload
 
 from core.domain.transaction.entities.category import CategoryEntity
 from core.domain.transaction.exceptions.category.already_exist import (

@@ -1,9 +1,8 @@
-from sqlalchemy import String, CheckConstraint, SmallInteger
+from uuid import UUID, uuid4
+
+from sqlalchemy import CheckConstraint, SmallInteger, String
+from sqlalchemy.dialects.postgresql import UUID as PgUUID
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import (
-    UUID as PgUUID,
-)
-from uuid import uuid4, UUID
 
 from core.domain.transaction.entities.operation import OperationEntity
 from core.domain.transaction.enums.operation import OperationType

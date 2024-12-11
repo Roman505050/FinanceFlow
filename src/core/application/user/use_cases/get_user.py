@@ -1,6 +1,7 @@
-from pydantic import ValidationError
-from loguru import logger
 from uuid import UUID
+
+from loguru import logger
+from pydantic import ValidationError
 
 from core.application.user.dto.user import UserDTO
 from core.domain.user.repositories.user import IUserRepository

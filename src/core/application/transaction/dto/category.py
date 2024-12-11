@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
 from uuid import UUID
+
+from pydantic import BaseModel, Field
 
 from core.domain.transaction.entities.category import CategoryEntity
 

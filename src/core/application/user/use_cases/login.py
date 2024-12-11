@@ -1,5 +1,5 @@
-from pydantic import ValidationError
 from loguru import logger
+from pydantic import ValidationError
 
 from core.application.user.dto.user import LoginUserDTO, UserDTO
 from core.application.user.exceptions.invalid_credentials import (

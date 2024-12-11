@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
 from uuid import UUID
+
+from pydantic import BaseModel, Field
 
 from core.domain.transaction.entities.operation import OperationEntity
 from core.domain.transaction.enums.operation import OperationType
