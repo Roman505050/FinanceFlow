@@ -1,9 +1,8 @@
+from uuid import UUID, uuid4
+
 from sqlalchemy import String
+from sqlalchemy.dialects.postgresql import UUID as PgUUID
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.dialects.postgresql import (
-    UUID as PgUUID,
-)
-from uuid import uuid4, UUID
 
 from core.domain.user.entities.role import RoleEntity
 from core.infrastructure.database.models.base import (

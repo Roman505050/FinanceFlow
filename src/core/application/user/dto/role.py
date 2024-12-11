@@ -1,5 +1,6 @@
-from pydantic import BaseModel
 from uuid import UUID
+
+from pydantic import BaseModel
 
 from core.domain.user.entities.role import RoleEntity
 

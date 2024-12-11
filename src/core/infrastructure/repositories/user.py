@@ -1,13 +1,14 @@
-from sqlalchemy import delete, select, insert, text
-from sqlalchemy.orm import selectinload
-from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
-from core.infrastructure.database.models.user import User
-from core.infrastructure.database.models.role import Role
+from sqlalchemy import delete, insert, select, text
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+
 from core.domain.user.entities.user import UserEntity
 from core.domain.user.exceptions import UserNotFoundException
 from core.domain.user.repositories.user import IUserRepository
+from core.infrastructure.database.models.role import Role
+from core.infrastructure.database.models.user import User
 from core.infrastructure.database.models.user_roles import UserRoles
 
 

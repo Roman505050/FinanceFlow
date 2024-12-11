@@ -1,6 +1,4 @@
-from core.application.transaction.dto.operation import (
-    OperationDTO,
-)
+from core.application.transaction.dto.operation import OperationDTO
 from core.domain.transaction.repositories.operation import IOperationRepository
 
 

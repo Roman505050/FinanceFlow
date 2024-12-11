@@ -1,11 +1,11 @@
 from uuid import uuid4
 
-from core.domain.transaction.entities.category import CategoryEntity
-from core.domain.transaction.repositories.category import ICategoryRepository
 from core.application.transaction.dto.category import (
     CategoryDTO,
     CreateCategoryDTO,
 )
+from core.domain.transaction.entities.category import CategoryEntity
+from core.domain.transaction.repositories.category import ICategoryRepository
 from core.domain.transaction.repositories.operation import IOperationRepository
 
 

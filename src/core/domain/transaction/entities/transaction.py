@@ -1,6 +1,6 @@
+import datetime
 from dataclasses import dataclass
 from uuid import UUID
-import datetime
 
 from core.domain.transaction.entities.category import CategoryEntity
 from core.domain.transaction.value_objects.money import Money

@@ -1,6 +1,6 @@
+import re
 from dataclasses import dataclass
 from uuid import UUID
-import re
 
 from core.domain.user.entities.role import RoleEntity
 

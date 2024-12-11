@@ -5,11 +5,11 @@ from core.application.transaction.dto.transaction import (
     TransactionDTO,
 )
 from core.domain.transaction.entities.transaction import TransactionEntity
+from core.domain.transaction.repositories.category import ICategoryRepository
+from core.domain.transaction.repositories.currency import ICurrencyRepository
 from core.domain.transaction.repositories.transaction import (
     ITransactionRepository,
 )
-from core.domain.transaction.repositories.category import ICategoryRepository
-from core.domain.transaction.repositories.currency import ICurrencyRepository
 from core.domain.transaction.value_objects.money import Money
 
 

@@ -1,6 +1,6 @@
+import re
 from dataclasses import dataclass
 from uuid import UUID
-import re
 
 
 @dataclass

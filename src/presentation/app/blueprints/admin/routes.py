@@ -1,14 +1,10 @@
-from flask import (
-    Blueprint,
-    render_template,
-    session,
-    abort,
-)
+from flask import Blueprint, abort, render_template, session
 
 from core.application.user.use_cases.get_user import GetUserUseCase
 from core.infrastructure.database.core import SessionContextManager
 from core.infrastructure.repositories.user import UserRepository
 from presentation.app.utils.permissions import has_permissions
+
 
 admin_bp = Blueprint(
     "admin",

@@ -1,13 +1,13 @@
-from email_validator import validate_email, EmailNotValidError
-from pydantic import ValidationError
+from email_validator import EmailNotValidError, validate_email
 from loguru import logger
+from pydantic import ValidationError
 
 from core.application.user.dto.user import RegisterUserDTO, UserDTO
 from core.application.user.factories.user import UserFactory
 from core.domain.user.entities.role import RoleEntity
 from core.domain.user.exceptions import UserAlreadyExistsException
-from core.domain.user.repositories.user import IUserRepository
 from core.domain.user.repositories.role import IRoleRepository
+from core.domain.user.repositories.user import IUserRepository
 from core.shared.exceptions import NotFoundException
 
 

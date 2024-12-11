@@ -1,21 +1,16 @@
-from flask import (
-    Flask,
-    render_template,
-    url_for,
-    redirect,
-    session,
-)
-from flasgger import Swagger  # type: ignore[import-untyped]
 from asgiref.wsgi import WsgiToAsgi
+from flasgger import Swagger  # type: ignore[import-untyped]
+from flask import Flask, redirect, render_template, session, url_for
 
+from config import SESSION_SECRET_KEY
+from presentation.app.api.category import category_api_bp
+from presentation.app.api.currency import currency_api_bp
+from presentation.app.api.operation import operation_api_bp
+from presentation.app.api.transaction import transaction_api_bp
 from presentation.app.blueprints.admin.routes import admin_bp
 from presentation.app.blueprints.auth.routes import auth_bp
 from presentation.app.blueprints.transactions.routes import transactions_bp
-from presentation.app.api.operation import operation_api_bp
-from presentation.app.api.category import category_api_bp
-from presentation.app.api.currency import currency_api_bp
-from presentation.app.api.transaction import transaction_api_bp
-from config import SESSION_SECRET_KEY
+
 
 app = Flask(__name__)
 app.json.ensure_ascii = False  # type: ignore[attr-defined]

@@ -1,6 +1,4 @@
-from core.application.transaction.dto.currency import (
-    CurrencyDTO,
-)
+from core.application.transaction.dto.currency import CurrencyDTO
 from core.domain.transaction.repositories.currency import ICurrencyRepository
 
 

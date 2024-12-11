@@ -1,10 +1,11 @@
-from sqlalchemy import delete, select
-from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
+from sqlalchemy import delete, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from core.domain.user.entities.role import RoleEntity
-from core.domain.user.repositories.role import IRoleRepository
 from core.domain.user.exceptions import RoleNotFoundException
+from core.domain.user.repositories.role import IRoleRepository
 from core.infrastructure.database.models.role import Role
 
 
